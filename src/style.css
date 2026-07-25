@@ -1,0 +1,70 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Inter', 'Avenir Next', 'Segoe UI', Arial, sans-serif;
+  --color-solar-50: #f7faed;
+  --color-solar-100: #edf4d2;
+  --color-solar-300: #cce85b;
+  --color-solar-400: #b8dc38;
+  --color-solar-500: #9fc727;
+  --color-forest-50: #eef7f2;
+  --color-forest-600: #23724e;
+  --color-forest-700: #185b3e;
+  --color-forest-800: #10452f;
+  --color-forest-900: #0b3023;
+  --color-forest-950: #071c16;
+  --color-surface-soft: #f8faf5;
+  --color-surface-muted: #f3f6ef;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
+  }
+
+  body {
+    min-width: 320px;
+    min-height: 100vh;
+    overflow-x: hidden;
+    background: #ffffff;
+    color: #0b3023;
+    font-family: var(--font-sans);
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  button,
+  a,
+  input,
+  textarea,
+  select {
+    outline-color: #23724e;
+  }
+
+  ::selection {
+    background: #cce85b;
+    color: #071c16;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+
+  [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
