@@ -1,6 +1,7 @@
 <script setup>
 import { nextTick, ref, watch } from 'vue'
 import { ChevronDown, MessageCircle, Phone, X } from '@lucide/vue'
+import BrandLogo from '@/components/ui/BrandLogo.vue'
 
 const props = defineProps({
   open: {
@@ -119,13 +120,11 @@ watch(
         <div class="flex items-center justify-between border-b border-emerald-950/10 pb-5">
           <a
             href="/"
-            class="flex items-center gap-2 text-lg font-bold tracking-[-0.03em] text-emerald-950 focus-visible:rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-600"
+            class="focus-visible:rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-600"
+            aria-label="Ideal Energy home"
             @click="navigateTo('home')"
           >
-            <span class="grid h-9 w-9 place-items-center rounded-full bg-lime-300 text-emerald-950" aria-hidden="true">
-              <span class="h-3.5 w-3.5 rounded-full border-[3px] border-current"></span>
-            </span>
-            SOLARA
+            <BrandLogo variant="light" size="sm" />
           </a>
           <button
             type="button"
@@ -176,27 +175,27 @@ watch(
                 </div>
               </div>
 
-              <a
+              <RouterLink
                 v-else
-                :href="item.href"
+                :to="item.href"
                 class="block rounded-xl px-4 py-3.5 text-base font-semibold transition focus-visible:outline-2 focus-visible:outline-emerald-600"
                 :class="activeSection === item.section ? 'bg-emerald-50 text-emerald-800' : 'text-slate-700 hover:bg-slate-50 hover:text-emerald-800'"
                 @click="navigateTo(item.section)"
               >
                 {{ item.label }}
-              </a>
+              </RouterLink>
             </li>
           </ul>
         </nav>
 
         <div class="mt-auto border-t border-emerald-950/10 pt-7">
-          <a
-            href="#contact"
+          <RouterLink
+            to="/#contact"
             class="flex w-full items-center justify-center rounded-full bg-lime-300 px-6 py-3.5 font-bold text-emerald-950 shadow-lg shadow-lime-300/20 transition hover:-translate-y-0.5 hover:bg-lime-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-600"
             @click="navigateTo('contact')"
           >
             Get Free Quote
-          </a>
+          </RouterLink>
           <div class="mt-5 flex items-center justify-center gap-3">
             <a
               :href="phoneHref"

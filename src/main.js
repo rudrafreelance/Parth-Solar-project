@@ -4,6 +4,11 @@ import 'aos/dist/aos.css'
 import './style.css'
 import App from './App.vue'
 import router from './router'
+import { captureLeadAttribution } from './composables/useLeadAttribution'
+import { initAnalytics } from './composables/useAnalytics'
+
+captureLeadAttribution()
+initAnalytics()
 
 const app = createApp(App)
 

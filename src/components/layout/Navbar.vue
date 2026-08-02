@@ -1,13 +1,13 @@
 <script setup>
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { useRoute } from 'vue-router'
 import { ArrowUpRight, BatteryCharging, Building2, ChevronDown, Factory, FileBadge, House, MessageCircle, Phone, Wrench } from '@lucide/vue'
+import BrandLogo from '@/components/ui/BrandLogo.vue'
 import MobileMenu from './MobileMenu.vue'
 
-const props = defineProps({
-  brand: {
-    type: String,
-    default: 'SOLARA',
-  },
+const route = useRoute()
+
+defineProps({
   quoteHref: {
     type: String,
     default: '#contact',
@@ -24,10 +24,11 @@ const props = defineProps({
 
 const navItems = [
   { label: 'Home', href: '/', section: 'home' },
-  { label: 'About', href: '#about', section: 'about' },
-  { label: 'Services', href: '#services', section: 'services' },
-  { label: 'Projects', href: '#projects', section: 'projects' },
-  { label: 'Contact', href: '#contact', section: 'contact' },
+  { label: 'About', href: '/about', section: 'about' },
+  { label: 'Services', href: '/services', section: 'services' },
+  { label: 'Projects', href: '/projects', section: 'projects' },
+  { label: 'Calculator', href: '/calculator', section: 'calculator' },
+  { label: 'Contact', href: '/#contact', section: 'contact' },
 ]
 
 const services = [
@@ -46,7 +47,13 @@ const activeSection = ref('home')
 const menuButton = ref(null)
 const servicesMenu = ref(null)
 
-const solidHeader = computed(() => isScrolled.value || mobileOpen.value)
+const isAdminRoute = computed(() => String(route.path || '').startsWith('/admin'))
+const isHomeHero = computed(() => route.name === 'home')
+
+/** Transparent glass only on home hero; light pages (calculator, about, etc.) stay solid. */
+const solidHeader = computed(
+  () => !isHomeHero.value || isScrolled.value || mobileOpen.value || isAdminRoute.value,
+)
 
 function getServicesMenuElement() {
   return Array.isArray(servicesMenu.value) ? servicesMenu.value[0] : servicesMenu.value
@@ -54,7 +61,9 @@ function getServicesMenuElement() {
 
 function updateScrollState() {
   isScrolled.value = window.scrollY > 24
-  if (window.scrollY < 120) activeSection.value = 'home'
+  if (route.name === 'home' && window.scrollY < 120 && !route.hash) {
+    activeSection.value = 'home'
+  }
 }
 
 function closeServices(event) {
@@ -81,8 +90,21 @@ function closeMobileMenu() {
 
 let sectionObserver
 
+function syncActiveFromRoute() {
+  if (route.name && route.name !== 'home') {
+    activeSection.value = String(route.name).replace('admin-', '')
+    return
+  }
+  if (route.hash) {
+    activeSection.value = route.hash.replace('#', '') || 'home'
+    return
+  }
+  activeSection.value = 'home'
+}
+
 onMounted(() => {
   updateScrollState()
+  syncActiveFromRoute()
   window.addEventListener('scroll', updateScrollState, { passive: true })
   document.addEventListener('click', handleDocumentClick)
 
@@ -92,6 +114,7 @@ onMounted(() => {
 
   sectionObserver = new IntersectionObserver(
     (entries) => {
+      if (route.name !== 'home') return
       const visibleSection = entries
         .filter((entry) => entry.isIntersecting)
         .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
@@ -103,6 +126,8 @@ onMounted(() => {
 
   sections.forEach((section) => sectionObserver.observe(section))
 })
+
+watch(() => route.fullPath, syncActiveFromRoute)
 
 onBeforeUnmount(() => {
   window.removeEventListener('scroll', updateScrollState)
@@ -129,18 +154,11 @@ watch(mobileOpen, async (isOpen) => {
     <nav class="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 sm:px-8 lg:px-12" aria-label="Primary navigation">
       <a
         href="/"
-        class="group flex shrink-0 items-center gap-2.5 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300"
-        aria-label="Solara home"
+        class="group flex shrink-0 items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300"
+        aria-label="Ideal Energy home"
         @click="handleNavigation('home')"
       >
-        <span
-          class="grid h-10 w-10 place-items-center rounded-full transition duration-300 group-hover:rotate-12"
-          :class="solidHeader ? 'bg-emerald-950 text-lime-300' : 'bg-lime-300 text-emerald-950'"
-          aria-hidden="true"
-        >
-          <span class="h-4 w-4 rounded-full border-[3px] border-current"></span>
-        </span>
-        <span class="text-lg font-extrabold tracking-[-0.04em] sm:text-xl">{{ brand }}</span>
+        <BrandLogo :variant="solidHeader ? 'light' : 'invert'" size="md" />
       </a>
 
       <ul class="hidden items-center gap-1 lg:flex">
@@ -205,9 +223,9 @@ watch(mobileOpen, async (isOpen) => {
             </Transition>
           </div>
 
-          <a
+          <RouterLink
             v-else
-            :href="item.href"
+            :to="item.href"
             class="group relative block rounded-full px-4 py-2.5 text-sm font-semibold transition focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-300"
             :class="activeSection === item.section ? (solidHeader ? 'text-emerald-800' : 'text-lime-300') : solidHeader ? 'text-slate-700 hover:text-emerald-800' : 'text-white/85 hover:text-white'"
             @click="handleNavigation(item.section)"
@@ -218,7 +236,7 @@ watch(mobileOpen, async (isOpen) => {
               :class="{ 'scale-x-100': activeSection === item.section }"
               aria-hidden="true"
             ></span>
-          </a>
+          </RouterLink>
         </li>
       </ul>
 

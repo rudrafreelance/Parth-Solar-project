@@ -22,7 +22,7 @@ const milestones = [
           decoding="async"
         />
         <div class="absolute -bottom-6 right-3 rounded-3xl bg-lime-300 p-6 text-emerald-950 shadow-xl sm:right-8">
-          <p class="text-4xl font-bold tracking-tight">15+</p>
+          <p class="text-4xl font-bold tracking-tight">10+</p>
           <p class="mt-1 text-sm font-bold">years of solar expertise</p>
         </div>
       </div>
@@ -31,7 +31,7 @@ const milestones = [
         <SectionHeading
           eyebrow="Our story"
           title="Purpose-led from the very first panel."
-          description="Solara began with the belief that choosing clean energy should feel clear, confident, and personal. That principle still guides every system we design."
+          description="Ideal Energy began with the belief that choosing clean energy should feel clear, confident, and personal. That principle still guides every system we design."
           align="left"
         />
         <p data-aos="fade-up" data-aos-delay="220" class="mt-6 text-left leading-7 text-slate-600">

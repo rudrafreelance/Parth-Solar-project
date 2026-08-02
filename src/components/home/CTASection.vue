@@ -20,13 +20,13 @@ const assurances = ['Free consultation', 'No-pressure proposal', 'Clear savings 
         <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-emerald-950/70">
           Get a tailored solar plan with real production numbers, honest pricing, and zero obligation.
         </p>
-        <a
-          href="#contact"
+        <RouterLink
+          to="/calculator"
           class="mt-9 inline-flex items-center justify-center gap-2 rounded-full bg-emerald-950 px-7 py-4 font-bold text-white transition hover:-translate-y-0.5 hover:bg-emerald-800"
         >
           Calculate my solar potential
           <ArrowRight class="h-5 w-5" aria-hidden="true" />
-        </a>
+        </RouterLink>
         <div class="mt-8 flex flex-col items-center justify-center gap-3 text-sm font-semibold sm:flex-row sm:gap-7">
           <span v-for="item in assurances" :key="item" class="inline-flex items-center gap-2">
             <span class="grid h-5 w-5 place-items-center rounded-full bg-emerald-950 text-lime-300">

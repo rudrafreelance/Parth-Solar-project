@@ -9,7 +9,7 @@ const testimonials = [
     initials: 'MR',
   },
   {
-    quote: 'Solara gave us a realistic business case and then delivered exactly what they promised. The system is already outperforming the original projection.',
+    quote: 'Ideal Energy gave us a realistic business case and then delivered exactly what they promised. The system is already outperforming the original projection.',
     name: 'Marcus Chen',
     role: 'Operations Director · Phoenix, AZ',
     initials: 'MC',

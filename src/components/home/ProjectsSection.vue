@@ -1,29 +1,18 @@
 <script setup>
+import { computed, onMounted } from 'vue'
 import { ArrowUpRight, MapPin, Zap } from '@lucide/vue'
+import { useProjects } from '@/composables/useProjects'
 
-const projects = [
-  {
-    title: 'Hillside family home',
-    location: 'Austin, Texas',
-    output: '12.4 kW',
-    type: 'Residential',
-    image: 'https://images.unsplash.com/photo-1509391366360-2e959784a276?auto=format&fit=crop&w=1200&q=85',
-  },
-  {
-    title: 'Westfield distribution hub',
-    location: 'Phoenix, Arizona',
-    output: '286 kW',
-    type: 'Commercial',
-    image: 'https://images.unsplash.com/photo-1497435334941-8c899ee9e8e9?auto=format&fit=crop&w=1200&q=85',
-  },
-  {
-    title: 'Oak & Pine eco retreat',
-    location: 'Boulder, Colorado',
-    output: '48.6 kW',
-    type: 'Hospitality',
-    image: 'https://images.unsplash.com/photo-1497440001374-f26997328c1b?auto=format&fit=crop&w=1200&q=85',
-  },
-]
+const { projects, fetchProjects } = useProjects()
+
+const featuredProjects = computed(() => {
+  const featured = projects.value.filter((project) => project.featured)
+  return (featured.length ? featured : projects.value).slice(0, 3)
+})
+
+onMounted(() => {
+  fetchProjects()
+})
 </script>
 
 <template>
@@ -36,22 +25,32 @@ const projects = [
             Real projects. Lasting impact.
           </h2>
         </div>
-        <a data-aos="fade-left" href="#contact" class="inline-flex items-center gap-2 font-bold text-emerald-950 transition hover:gap-3">
+        <RouterLink
+          data-aos="fade-left"
+          to="/projects"
+          class="inline-flex items-center gap-2 font-bold text-emerald-950 transition hover:gap-3 focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-emerald-600"
+        >
           View all projects
           <ArrowUpRight class="h-5 w-5" aria-hidden="true" />
-        </a>
+        </RouterLink>
       </div>
 
       <div class="mt-14 grid gap-6 lg:grid-cols-3">
         <article
-          v-for="(project, index) in projects"
-          :key="project.title"
+          v-for="(project, index) in featuredProjects"
+          :key="project.id"
           data-aos="fade-up"
           :data-aos-delay="index * 100"
           class="group overflow-hidden rounded-[2rem] bg-white text-left shadow-sm"
         >
           <div class="relative overflow-hidden">
-            <img :src="project.image" :alt="`${project.title} solar installation`" class="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105" />
+            <img
+              :src="project.image_url"
+              :alt="`${project.title} solar installation`"
+              class="aspect-[4/3] w-full object-cover transition duration-700 group-hover:scale-105"
+              loading="lazy"
+              decoding="async"
+            />
             <span class="absolute left-5 top-5 rounded-full bg-white/90 px-4 py-2 text-xs font-bold text-emerald-950 backdrop-blur">
               {{ project.type }}
             </span>

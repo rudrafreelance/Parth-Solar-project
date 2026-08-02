@@ -7,11 +7,12 @@ import {
   MessageCircle,
   Phone,
 } from '@lucide/vue'
+import BrandLogo from '@/components/ui/BrandLogo.vue'
 
 defineProps({
   brand: {
     type: String,
-    default: 'SOLARA',
+    default: 'Ideal Energy',
   },
   description: {
     type: String,
@@ -21,34 +22,36 @@ defineProps({
   quickLinks: {
     type: Array,
     default: () => [
-      { label: 'Home', href: '/' },
-      { label: 'About', href: '#about' },
-      { label: 'Projects', href: '#projects' },
-      { label: 'Our Process', href: '#process' },
-      { label: 'Contact', href: '#contact' },
+      { label: 'Home', to: '/' },
+      { label: 'About', to: '/about' },
+      { label: 'Services', to: '/services' },
+      { label: 'Projects', to: '/projects' },
+      { label: 'Calculator', to: '/calculator' },
+      { label: 'Our Process', to: '/#process' },
+      { label: 'Contact', to: '/#contact' },
     ],
   },
   services: {
     type: Array,
     default: () => [
-      { label: 'Residential Solar', href: '#services' },
-      { label: 'Commercial Solar', href: '#services' },
-      { label: 'Industrial Solar', href: '#services' },
-      { label: 'Battery Storage', href: '#services' },
-      { label: 'Maintenance', href: '#services' },
-      { label: 'Government Subsidy', href: '#services' },
+      { label: 'Residential Solar', to: '/services' },
+      { label: 'Commercial Solar', to: '/services' },
+      { label: 'Industrial Solar', to: '/services' },
+      { label: 'Battery Storage', to: '/services' },
+      { label: 'Maintenance', to: '/services' },
+      { label: 'Government Subsidy', to: '/services' },
     ],
   },
   contact: {
     type: Object,
     default: () => ({
-      phone: '(800) 555-SOLAR',
-      phoneHref: 'tel:+18005557652',
-      email: 'hello@solara.energy',
-      emailHref: 'mailto:hello@solara.energy',
-      address: '240 Greenway Drive, Austin, TX',
-      mapHref: 'https://maps.google.com/?q=240+Greenway+Drive+Austin+TX',
-      whatsappHref: 'https://wa.me/18005557652',
+      phone: '80030 80020',
+      phoneHref: 'tel:+918003080020',
+      email: 'hello@idealenergy.in',
+      emailHref: 'mailto:hello@idealenergy.in',
+      address: 'Ahmedabad, Gujarat, India',
+      mapHref: 'https://maps.google.com/?q=Ahmedabad+Gujarat+India',
+      whatsappHref: 'https://wa.me/918003080020',
     }),
   },
   socialLinks: {
@@ -60,18 +63,13 @@ defineProps({
       { label: 'YouTube', href: 'https://youtube.com', icon: 'youtube' },
     ],
   },
-  privacyHref: {
-    type: String,
-    default: '/privacy',
-  },
-  termsHref: {
-    type: String,
-    default: '/terms',
-  },
 })
 
 const emit = defineEmits(['subscribe'])
 const email = ref('')
+
+const linkClass =
+  'group inline-flex items-center text-sm text-emerald-50/60 transition hover:text-white focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300'
 
 function subscribe() {
   emit('subscribe', email.value)
@@ -87,16 +85,13 @@ function subscribe() {
     <div class="relative mx-auto max-w-7xl px-5 pb-8 pt-16 sm:px-8 sm:pt-20 lg:px-12 lg:pt-24">
       <div class="grid gap-12 border-b border-white/10 pb-14 sm:grid-cols-2 lg:grid-cols-[1.35fr_.75fr_.85fr_1.05fr] lg:gap-10 lg:pb-18">
         <div data-aos="fade-up" class="max-w-md">
-          <a
-            href="/"
-            class="inline-flex items-center gap-3 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300"
-            aria-label="Solara home"
+          <RouterLink
+            to="/"
+            class="inline-flex items-center rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300"
+            aria-label="Ideal Energy home"
           >
-            <span class="grid h-11 w-11 place-items-center rounded-full bg-lime-300 text-emerald-950" aria-hidden="true">
-              <span class="h-4 w-4 rounded-full border-[3px] border-current"></span>
-            </span>
-            <span class="text-xl font-extrabold tracking-[-0.04em]">{{ brand }}</span>
-          </a>
+            <BrandLogo variant="invert" size="lg" />
+          </RouterLink>
 
           <p class="mt-6 max-w-sm text-sm leading-7 text-emerald-50/60">
             {{ description }}
@@ -184,13 +179,10 @@ function subscribe() {
           <h2 class="text-sm font-bold uppercase tracking-[0.14em] text-lime-300">Quick Links</h2>
           <ul class="mt-6 space-y-3.5">
             <li v-for="link in quickLinks" :key="link.label">
-              <a
-                :href="link.href"
-                class="group inline-flex items-center text-sm text-emerald-50/60 transition hover:text-white focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300"
-              >
+              <RouterLink :to="link.to" :class="linkClass">
                 <span class="mr-0 h-px w-0 bg-lime-300 transition-all duration-300 group-hover:mr-2 group-hover:w-4" aria-hidden="true"></span>
                 {{ link.label }}
-              </a>
+              </RouterLink>
             </li>
           </ul>
         </div>
@@ -199,13 +191,10 @@ function subscribe() {
           <h2 class="text-sm font-bold uppercase tracking-[0.14em] text-lime-300">Services</h2>
           <ul class="mt-6 space-y-3.5">
             <li v-for="service in services" :key="service.label">
-              <a
-                :href="service.href"
-                class="group inline-flex items-center text-sm text-emerald-50/60 transition hover:text-white focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300"
-              >
+              <RouterLink :to="service.to" :class="linkClass">
                 <span class="mr-0 h-px w-0 bg-lime-300 transition-all duration-300 group-hover:mr-2 group-hover:w-4" aria-hidden="true"></span>
                 {{ service.label }}
-              </a>
+              </RouterLink>
             </li>
           </ul>
         </div>
@@ -259,14 +248,20 @@ function subscribe() {
       </div>
 
       <div class="flex flex-col gap-5 pt-7 text-xs text-emerald-50/45 sm:flex-row sm:items-center sm:justify-between">
-        <p>© {{ new Date().getFullYear() }} {{ brand }} Energy. All rights reserved.</p>
+        <p>© {{ new Date().getFullYear() }} {{ brand }}. All rights reserved.</p>
         <nav class="flex flex-wrap gap-x-6 gap-y-2" aria-label="Legal">
-          <a :href="privacyHref" class="transition hover:text-white focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300">
+          <RouterLink
+            to="/privacy"
+            class="transition hover:text-white focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300"
+          >
             Privacy Policy
-          </a>
-          <a :href="termsHref" class="transition hover:text-white focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300">
+          </RouterLink>
+          <RouterLink
+            to="/terms"
+            class="transition hover:text-white focus-visible:rounded focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-lime-300"
+          >
             Terms & Conditions
-          </a>
+          </RouterLink>
         </nav>
       </div>
     </div>

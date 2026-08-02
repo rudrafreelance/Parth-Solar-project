@@ -6,7 +6,7 @@ const team = [
     name: 'Adrian Cole',
     role: 'Founder & Energy Strategist',
     image: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=900&q=85',
-    bio: 'Leading Solara with a focus on transparent energy planning and enduring customer value.',
+    bio: 'Leading Ideal Energy with a focus on transparent energy planning and enduring customer value.',
   },
   {
     name: 'Maya Patel',

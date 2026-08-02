@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
+  <rect width="1200" height="630" fill="#071c16"/>
+  <circle cx="980" cy="120" r="220" fill="#cce85b" fill-opacity="0.12"/>
+  <circle cx="180" cy="540" r="180" fill="#23724e" fill-opacity="0.35"/>
+  <circle cx="220" cy="210" r="54" fill="#cce85b"/>
+  <g stroke="#071c16" stroke-width="10" stroke-linecap="round">
+    <path d="M220 120V145"/>
+    <path d="M220 275V300"/>
+    <path d="M140 210H115"/>
+    <path d="M325 210H300"/>
+    <path d="M155 145L173 163"/>
+    <path d="M267 257L285 275"/>
+    <path d="M285 145L267 163"/>
+    <path d="M173 257L155 275"/>
+  </g>
+  <text x="120" y="360" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="84" font-weight="800">Ideal Energy</text>
+  <text x="120" y="440" fill="#cce85b" font-family="Arial, Helvetica, sans-serif" font-size="40" font-weight="600">Premium solar solutions for homes &amp; business</text>
+</svg>
