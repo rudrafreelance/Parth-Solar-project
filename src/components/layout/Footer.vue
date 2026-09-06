@@ -8,6 +8,14 @@ import {
   Phone,
 } from '@lucide/vue'
 import BrandLogo from '@/components/ui/BrandLogo.vue'
+import {
+  ADMIN_EMAIL,
+  ADMIN_EMAIL_HREF,
+  ADMIN_PHONE_DISPLAY,
+  ADMIN_TEL_HREF,
+  ADMIN_WHATSAPP_HREF,
+  SOCIAL_LINKS,
+} from '@/lib/contact'
 
 defineProps({
   brand: {
@@ -34,34 +42,29 @@ defineProps({
   services: {
     type: Array,
     default: () => [
-      { label: 'Residential Solar', to: '/services' },
-      { label: 'Commercial Solar', to: '/services' },
-      { label: 'Industrial Solar', to: '/services' },
-      { label: 'Battery Storage', to: '/services' },
-      { label: 'Maintenance', to: '/services' },
-      { label: 'Government Subsidy', to: '/services' },
+      { label: 'Residential Solar', to: '/services/residential' },
+      { label: 'Commercial Solar', to: '/services/commercial' },
+      { label: 'Industrial Solar', to: '/services/industrial' },
+      { label: 'Battery Storage', to: '/services/battery' },
+      { label: 'Maintenance', to: '/services/maintenance' },
+      { label: 'Government Subsidy', to: '/services/government-subsidy' },
     ],
   },
   contact: {
     type: Object,
     default: () => ({
-      phone: '80030 80020',
-      phoneHref: 'tel:+918003080020',
-      email: 'hello@idealenergy.in',
-      emailHref: 'mailto:hello@idealenergy.in',
+      phone: ADMIN_PHONE_DISPLAY,
+      phoneHref: ADMIN_TEL_HREF,
+      email: ADMIN_EMAIL,
+      emailHref: ADMIN_EMAIL_HREF,
       address: 'Ahmedabad, Gujarat, India',
       mapHref: 'https://maps.google.com/?q=Ahmedabad+Gujarat+India',
-      whatsappHref: 'https://wa.me/918003080020',
+      whatsappHref: ADMIN_WHATSAPP_HREF,
     }),
   },
   socialLinks: {
     type: Array,
-    default: () => [
-      { label: 'Instagram', href: 'https://instagram.com', icon: 'instagram' },
-      { label: 'LinkedIn', href: 'https://linkedin.com', icon: 'linkedin' },
-      { label: 'Facebook', href: 'https://facebook.com', icon: 'facebook' },
-      { label: 'YouTube', href: 'https://youtube.com', icon: 'youtube' },
-    ],
+    default: () => SOCIAL_LINKS,
   },
 })
 

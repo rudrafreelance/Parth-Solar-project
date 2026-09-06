@@ -25,7 +25,7 @@ const privacySections = [
   },
   {
     heading: 'Contact',
-    body: 'For privacy questions, email hello@idealenergy.in or call +91 80030 80020.',
+    body: 'For privacy questions, email idealeneergy@gmail.com or call +91 63558 59771.',
   },
 ]
 
@@ -44,7 +44,7 @@ const termsSections = [
   },
   {
     heading: 'Contact',
-    body: 'Questions about these terms: hello@idealenergy.in or +91 80030 80020.',
+    body: 'Questions about these terms: idealeneergy@gmail.com or +91 63558 59771.',
   },
 ]
 

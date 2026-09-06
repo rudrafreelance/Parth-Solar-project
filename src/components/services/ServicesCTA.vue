@@ -1,5 +1,18 @@
 <script setup>
 import { ArrowRight, MapPin, Phone } from '@lucide/vue'
+import { ADMIN_TEL_HREF, openWhatsApp } from '@/lib/contact'
+
+function bookSiteVisit() {
+  openWhatsApp(
+    'Hi Ideal Energy — I\'d like to book a free site visit / survey for solar at my property.',
+  )
+}
+
+function getFreeQuote() {
+  openWhatsApp(
+    'Hi Ideal Energy — I\'d like a free solar quote for my home / business. Please guide me on the next steps.',
+  )
+}
 </script>
 
 <template>
@@ -11,16 +24,32 @@ import { ArrowRight, MapPin, Phone } from '@lucide/vue'
         <h2 class="mt-5 text-4xl font-bold leading-tight tracking-[-0.04em] text-emerald-950 sm:text-5xl lg:text-6xl">Ready to put clean energy to work?</h2>
         <p class="mx-auto mt-6 max-w-2xl text-lg leading-8 text-emerald-950/70">Get an expert site review, clear recommendations, and a transparent proposal with no pressure.</p>
         <div class="mt-9 flex flex-col justify-center gap-4 sm:flex-row sm:flex-wrap">
-          <a href="#contact-form" class="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-950 px-6 py-4 font-bold text-white transition hover:-translate-y-0.5 hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">
+          <button
+            type="button"
+            class="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-950 px-6 py-4 font-bold text-white transition hover:-translate-y-0.5 hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+            @click="bookSiteVisit"
+          >
             <MapPin class="h-5 w-5" aria-hidden="true" />Book Free Site Visit
-          </a>
-          <a href="#contact-form" class="inline-flex items-center justify-center gap-2 rounded-full bg-white/50 px-6 py-4 font-bold text-emerald-950 transition hover:-translate-y-0.5 hover:bg-white/75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">
+          </button>
+          <button
+            type="button"
+            class="inline-flex items-center justify-center gap-2 rounded-full bg-white/50 px-6 py-4 font-bold text-emerald-950 transition hover:-translate-y-0.5 hover:bg-white/75 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+            @click="getFreeQuote"
+          >
             Get Free Quote<ArrowRight class="h-5 w-5" aria-hidden="true" />
-          </a>
-          <a href="tel:+18005557652" class="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-950/20 px-6 py-4 font-bold text-emerald-950 transition hover:-translate-y-0.5 hover:bg-white/35 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">
+          </button>
+          <a
+            :href="ADMIN_TEL_HREF"
+            class="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-950/20 px-6 py-4 font-bold text-emerald-950 transition hover:-translate-y-0.5 hover:bg-white/35 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+          >
             <Phone class="h-5 w-5" aria-hidden="true" />Call Now
           </a>
         </div>
+        <p class="mt-5 text-sm text-emerald-950/55">
+          Or use the
+          <RouterLink to="/calculator" class="font-semibold text-emerald-900 underline-offset-2 hover:underline">savings calculator</RouterLink>
+          for a quick estimate.
+        </p>
       </div>
     </div>
   </section>

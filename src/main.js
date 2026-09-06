@@ -16,8 +16,14 @@ app.use(router)
 app.mount('#app')
 
 AOS.init({
-  duration: 700,
+  duration: 800,
   easing: 'ease-out-cubic',
-  offset: 60,
+  offset: 40,
   once: true,
+  mirror: false,
+  anchorPlacement: 'top-bottom',
+  disable: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
 })
+
+// First paint after mount
+window.requestAnimationFrame(() => AOS.refresh())

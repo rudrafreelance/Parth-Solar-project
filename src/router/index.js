@@ -52,6 +52,18 @@ const router = createRouter({
       },
     },
     {
+      path: '/services/:slug',
+      name: 'service-detail',
+      component: () => import('@/views/ServicePage.vue'),
+      meta: {
+        seo: {
+          title: 'Solar Service | Ideal Energy',
+          description: 'Explore Ideal Energy solar service details, features, and next steps.',
+          path: '/services',
+        },
+      },
+    },
+    {
       path: '/projects',
       name: 'projects',
       component: () => import('@/views/Projects.vue'),

@@ -32,11 +32,11 @@ onMounted(() => {
       </p>
       <div class="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
         <a
-          href="tel:+918003080020"
+          href="tel:+916355859771"
           class="inline-flex items-center gap-2 rounded-full bg-emerald-950 px-6 py-3.5 font-bold text-white transition hover:bg-emerald-800"
         >
           <Phone class="h-4 w-4" aria-hidden="true" />
-          Call 80030 80020
+          Call 63558 59771
         </a>
         <RouterLink
           to="/"

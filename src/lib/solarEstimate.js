@@ -3,9 +3,17 @@
 const AVG_TARIFF = 8 // ₹ / unit
 const UNITS_PER_KW_PER_MONTH = 120
 const COST_PER_KW = 55_000
-const SELF_CONSUMPTION = 0.85
-const SUBSIDY_PER_KW = 18_000 // indicative PM Surya Ghar-style support (capped below)
+/** Indicative PM Surya Ghar-style support (residential, capped at 3 kW). */
+const SUBSIDY_FIRST_2KW_RATE = 30_000
+const SUBSIDY_NEXT_KW_RATE = 18_000
 const MAX_SUBSIDY_KW = 3
+
+function residentialSubsidy(systemKw) {
+  const kw = Math.min(Math.max(0, systemKw), MAX_SUBSIDY_KW)
+  const first = Math.min(kw, 2) * SUBSIDY_FIRST_2KW_RATE
+  const next = Math.max(0, kw - 2) * SUBSIDY_NEXT_KW_RATE
+  return Math.round(first + next)
+}
 
 /** Bill cycle length in months (Gujarat DISCOMs often bill every 2 months). */
 export const BILL_PERIODS = [
@@ -33,11 +41,11 @@ export function estimateSolarSavings({
   const systemKw = Math.min(20, Math.max(1, Math.round((monthlyUnits / UNITS_PER_KW_PER_MONTH) * 2) / 2))
 
   const grossCost = systemKw * COST_PER_KW
-  const subsidyKw = propertyType === 'residential' ? Math.min(systemKw, MAX_SUBSIDY_KW) : 0
-  const subsidy = Math.round(subsidyKw * SUBSIDY_PER_KW)
+  const subsidy = propertyType === 'residential' ? residentialSubsidy(systemKw) : 0
   const netCost = Math.max(0, grossCost - subsidy)
 
-  const annualSavings = Math.round(bill * 12 * SELF_CONSUMPTION)
+  // Year-1 savings ≈ yearly bill; payback is always from post-subsidy net investment
+  const annualSavings = Math.round(bill * 12)
   const paybackYears = annualSavings > 0 ? Math.round((netCost / annualSavings) * 10) / 10 : null
   const twentyFiveYearSavings = annualSavings * 25
 

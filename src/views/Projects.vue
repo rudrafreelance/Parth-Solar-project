@@ -1,5 +1,6 @@
 <script setup>
-import { computed, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import AOS from 'aos'
 import ProjectCard from '@/components/projects/ProjectCard.vue'
 import ProjectsHero from '@/components/projects/ProjectsHero.vue'
 import { useProjects } from '@/composables/useProjects'
@@ -15,6 +16,19 @@ const filters = computed(() => {
 const filteredProjects = computed(() => {
   if (activeFilter.value === 'All') return projects.value
   return projects.value.filter((project) => project.type === activeFilter.value)
+})
+
+async function refreshMotion() {
+  await nextTick()
+  window.requestAnimationFrame(() => AOS.refreshHard())
+}
+
+watch(loading, (isLoading) => {
+  if (!isLoading) refreshMotion()
+})
+
+watch(activeFilter, () => {
+  refreshMotion()
 })
 
 onMounted(() => {

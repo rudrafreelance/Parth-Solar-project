@@ -4,6 +4,7 @@ import {
   ClipboardCheck,
   Droplets,
   Factory,
+  FileBadge,
   House,
   Waves,
   Wrench,
@@ -53,7 +54,7 @@ export const services = [
     id: 'water-heater',
     title: 'Solar Water Heater',
     icon: Waves,
-    image: 'https://images.unsplash.com/photo-1574263867128-a3d5c1b1deae?auto=format&fit=crop&w=1200&q=85',
+    image: 'https://images.unsplash.com/photo-1548337138-e87d889cc369?auto=format&fit=crop&w=1200&q=85',
     description: 'Reliable hot water powered by sunlight, with minimal running cost and maintenance.',
     benefits: ['Up to 80% heating savings', 'Low maintenance', 'Year-round comfort'],
     overview: 'Efficient solar thermal systems sized for daily demand and local climate conditions.',
@@ -114,4 +115,26 @@ export const services = [
     timeline: 'Baseline audit, service calendar, ongoing monitoring, annual review.',
     installationTime: '12-month coverage',
   },
+  {
+    id: 'government-subsidy',
+    title: 'Government Subsidy',
+    icon: FileBadge,
+    image: 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1200&q=85',
+    description: 'Clear guidance through PM Surya Ghar and other eligible solar subsidy programs.',
+    benefits: ['Eligibility clarity', 'Paperwork support', 'Faster approvals'],
+    overview:
+      'We help you understand subsidy options, prepare documents, and coordinate with DISCOM processes so you claim what you qualify for without confusion.',
+    idealCustomers: 'Residential homeowners and eligible institutions applying under current solar schemes.',
+    features: ['Scheme guidance', 'Document checklist', 'Application support', 'Net-metering coordination'],
+    timeline: 'Eligibility review, document prep, application filing, follow-up until sanction.',
+    installationTime: 'Parallel with project timeline',
+  },
 ]
+
+export function getServiceById(id) {
+  return services.find((service) => service.id === id) || null
+}
+
+export function servicePath(id) {
+  return `/services/${id}`
+}

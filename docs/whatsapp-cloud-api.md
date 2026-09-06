@@ -9,7 +9,7 @@ Add these to **project root** `.env` (local) and **Vercel → Settings → Envir
 ```bash
 WHATSAPP_ACCESS_TOKEN=EAAxxxx...
 WHATSAPP_PHONE_NUMBER_ID=123456789012345
-WHATSAPP_ADMIN_NUMBER=918003080020
+WHATSAPP_ADMIN_NUMBER=916355859771
 
 # Recommended for production (business-initiated messages need a template)
 WHATSAPP_TEMPLATE_NAME=website_chat_alert

@@ -34,7 +34,7 @@ Landing page is `noindex` so it does not compete with organic SEO pages.
 | Subsidy | solar subsidy, PM Surya Ghar solar |
 | Commercial | commercial solar rooftop |
 
-Use **exact / phrase** match first. Add call extensions (80030 80020).
+Use **exact / phrase** match first. Add call extensions (63558 59771).
 
 ## Budget (test)
 

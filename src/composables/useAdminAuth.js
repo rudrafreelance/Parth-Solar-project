@@ -35,9 +35,24 @@ export function useAdminAuth() {
       return false
     }
 
-    const { error } = await supabase.auth.signInWithPassword({ email, password })
+    const cleanEmail = String(email || '').trim().toLowerCase()
+    const cleanPassword = String(password || '')
+
+    const { error } = await supabase.auth.signInWithPassword({
+      email: cleanEmail,
+      password: cleanPassword,
+    })
     if (error) {
-      authError.value = error.message
+      const msg = error.message || 'Login failed'
+      if (/email not confirmed/i.test(msg) || error.code === 'email_not_confirmed') {
+        authError.value =
+          'Email is not confirmed. In Supabase → Authentication → Users, open this user and confirm the email (or disable “Confirm email” in Auth settings).'
+      } else if (/invalid login credentials/i.test(msg)) {
+        authError.value =
+          'Invalid login credentials. Check email/password, that the user exists in this Supabase project, and that root .env uses this project’s anon/publishable key. Then restart npm run dev.'
+      } else {
+        authError.value = msg
+      }
       return false
     }
 

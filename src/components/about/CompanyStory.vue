@@ -3,9 +3,9 @@ import { ArrowUpRight, CheckCircle2 } from '@lucide/vue'
 import SectionHeading from './SectionHeading.vue'
 
 const milestones = [
-  { year: '2011', label: 'Founded with a simple clean-energy mission' },
-  { year: '2016', label: 'Expanded into commercial solar engineering' },
-  { year: '2021', label: 'Introduced intelligent battery solutions' },
+  { year: '2018', label: 'Founded with a simple clean-energy mission' },
+  { year: '2020', label: 'Expanded into commercial solar engineering' },
+  { year: '2023', label: 'Introduced intelligent battery solutions' },
   { year: 'Today', label: 'Powering thousands of homes and businesses' },
 ]
 </script>
@@ -15,14 +15,14 @@ const milestones = [
     <div class="mx-auto grid max-w-7xl items-center gap-14 px-5 sm:px-8 lg:grid-cols-2 lg:gap-20 lg:px-12">
       <div data-aos="fade-right" class="relative">
         <img
-          src="https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1400&q=85"
-          alt="Solar engineering team reviewing a renewable energy project"
+          src="https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=1400&q=85"
+          alt="Solar panels generating clean energy under open sky"
           class="aspect-[4/5] w-full rounded-[2rem] object-cover sm:aspect-[5/4] lg:aspect-[4/5]"
           loading="lazy"
           decoding="async"
         />
         <div class="absolute -bottom-6 right-3 rounded-3xl bg-lime-300 p-6 text-emerald-950 shadow-xl sm:right-8">
-          <p class="text-4xl font-bold tracking-tight">10+</p>
+          <p class="text-4xl font-bold tracking-tight">8+</p>
           <p class="mt-1 text-sm font-bold">years of solar expertise</p>
         </div>
       </div>

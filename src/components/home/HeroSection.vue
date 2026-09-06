@@ -2,9 +2,9 @@
 import { ArrowRight, BadgeCheck, Leaf, Sun, Zap } from '@lucide/vue'
 
 const highlights = [
-  { value: '12k+', label: 'homes powered' },
+  { value: '2.4k+', label: 'homes powered' },
   { value: '40%', label: 'average savings' },
-  { value: '25 yr', label: 'panel warranty' },
+  { value: '8 yr', label: 'industry experience' },
 ]
 
 const productionBars = ['h-[35%]', 'h-[48%]', 'h-[42%]', 'h-[68%]', 'h-[82%]', 'h-[74%]', 'h-[96%]']
@@ -22,7 +22,7 @@ const productionBars = ['h-[35%]', 'h-[48%]', 'h-[42%]', 'h-[68%]', 'h-[82%]', '
     </div>
     <div class="absolute -right-24 -top-24 -z-10 h-80 w-80 rounded-full bg-lime-300/10 blur-3xl"></div>
 
-    <div class="mx-auto grid min-h-[760px] max-w-7xl items-center gap-14 px-5 py-24 sm:px-8 lg:grid-cols-[1.15fr_.85fr] lg:px-12 lg:py-28">
+    <div class="mx-auto grid min-h-[760px] max-w-7xl items-center gap-14 px-5 pb-24 pt-36 sm:px-8 lg:grid-cols-[1.15fr_.85fr] lg:px-12 lg:pb-28 lg:pt-40">
       <div class="max-w-3xl text-left">
         <div
           data-aos="fade-down"

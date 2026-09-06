@@ -3,9 +3,9 @@ import { onBeforeUnmount, onMounted, ref } from 'vue'
 
 const stats = [
   { value: 2400, suffix: '+', label: 'Projects completed' },
-  { value: 12000, suffix: '+', label: 'Happy customers' },
-  { value: 15, suffix: '+', label: 'Years of experience' },
-  { value: 186, suffix: ' MW', label: 'Clean energy installed' },
+  { value: 2400, suffix: '+', label: 'Happy customers' },
+  { value: 8, suffix: '+', label: 'Years of experience' },
+  { value: 48, suffix: ' MW', label: 'Clean energy installed' },
 ]
 
 const section = ref(null)

@@ -14,7 +14,7 @@ export async function submitLead({
   sourceFallback = 'website_contact',
 }) {
   if (!isSupabaseConfigured || !supabase) {
-    throw new Error('Form backend is not connected yet. Please call 80030 80020.')
+    throw new Error('Form backend is not connected yet. Please call 63558 59771.')
   }
 
   const source = resolveLeadSource(sourceFallback)
@@ -32,12 +32,14 @@ export async function submitLead({
     ...attribution,
   }
 
-  const { data, error } = await supabase.from('leads').insert(row).select('id').single()
+  // Insert only — do not .select() after insert: anon has INSERT but not SELECT on leads,
+  // and RETURNING would fail RLS with "new row violates row-level security policy".
+  const { error } = await supabase.from('leads').insert(row)
   if (error) throw error
 
   await notifyAdminLead(row).catch(() => {})
 
-  return { id: data?.id, source }
+  return { source }
 }
 
 /** Notify admin when calculator estimate is generated (before contact details). */

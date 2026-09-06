@@ -1,6 +1,7 @@
 <script setup>
 import { nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { CheckCircle2, LoaderCircle, MessageCircle, Send, X } from '@lucide/vue'
+import { CheckCircle2, MessageCircle, Send, X } from '@lucide/vue'
+import { ADMIN_PHONE_DISPLAY, openWhatsApp } from '@/lib/contact'
 
 defineProps({
   businessName: {
@@ -14,49 +15,34 @@ const message = ref('')
 const name = ref('')
 const phone = ref('')
 const input = ref(null)
-const sending = ref(false)
 const sent = ref(false)
-const error = ref('')
 
-async function sendToAdmin() {
-  if (!message.value.trim() || sending.value) return
+function buildWhatsAppText() {
+  const lines = [
+    'Hi Ideal Energy — enquiry from the website',
+    name.value.trim() ? `Name: ${name.value.trim()}` : null,
+    phone.value.trim() ? `Phone: ${phone.value.trim()}` : null,
+    '',
+    message.value.trim(),
+  ].filter((line) => line !== null)
 
-  sending.value = true
-  error.value = ''
-  sent.value = false
+  return lines.join('\n')
+}
 
-  try {
-    const response = await fetch('/api/whatsapp-message', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        name: name.value.trim(),
-        phone: phone.value.trim(),
-        message: message.value.trim(),
-      }),
-    })
+function sendToAdmin() {
+  if (!message.value.trim()) return
 
-    const data = await response.json().catch(() => ({}))
+  openWhatsApp(buildWhatsAppText())
 
-    if (!response.ok) {
-      throw new Error(data.error || 'Could not send message. Please try again.')
-    }
-
-    sent.value = true
-    message.value = ''
-    name.value = ''
-    phone.value = ''
-  } catch (err) {
-    error.value = err?.message || 'Could not send message. Please try again.'
-  } finally {
-    sending.value = false
-  }
+  sent.value = true
+  message.value = ''
+  name.value = ''
+  phone.value = ''
 }
 
 async function openChat() {
   open.value = true
   sent.value = false
-  error.value = ''
   await nextTick()
   input.value?.focus()
 }
@@ -102,7 +88,7 @@ onBeforeUnmount(() => {
             </span>
             <div>
               <p class="text-sm font-bold">{{ businessName }}</p>
-              <p class="text-xs text-white/75">Message goes to our team</p>
+              <p class="text-xs text-white/75">Opens WhatsApp chat</p>
             </div>
           </div>
           <button
@@ -117,7 +103,7 @@ onBeforeUnmount(() => {
 
         <div class="space-y-3 bg-[#ece5dd] px-4 py-4">
           <div class="max-w-[90%] rounded-2xl rounded-tl-sm bg-white px-3.5 py-2.5 text-sm leading-6 text-emerald-950 shadow-sm">
-            Hi! Ask us anything about solar. Your message is sent to our admin — WhatsApp will not open on your device.
+            Hi! Ask us anything about solar. Tap send to continue on WhatsApp — message goes to {{ ADMIN_PHONE_DISPLAY }}.
           </div>
 
           <div
@@ -125,15 +111,7 @@ onBeforeUnmount(() => {
             class="flex max-w-[95%] items-start gap-2 rounded-2xl rounded-tl-sm bg-emerald-50 px-3.5 py-2.5 text-sm leading-6 text-emerald-900 shadow-sm"
           >
             <CheckCircle2 class="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
-            <span>Sent. Our team will get back to you shortly.</span>
-          </div>
-
-          <div
-            v-if="error"
-            class="max-w-[95%] rounded-2xl rounded-tl-sm bg-red-50 px-3.5 py-2.5 text-sm leading-6 text-red-800 shadow-sm"
-            role="alert"
-          >
-            {{ error }}
+            <span>WhatsApp opened. Send the message there to reach our team.</span>
           </div>
         </div>
 
@@ -174,14 +152,13 @@ onBeforeUnmount(() => {
           <button
             type="submit"
             class="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#25d366] px-4 py-3 text-sm font-bold text-white transition hover:bg-[#1ebe57] disabled:opacity-50"
-            :disabled="!message.trim() || sending"
+            :disabled="!message.trim()"
           >
-            <LoaderCircle v-if="sending" class="h-4 w-4 animate-spin" aria-hidden="true" />
-            <Send v-else class="h-4 w-4" aria-hidden="true" />
-            {{ sending ? 'Sending…' : 'Send message' }}
+            <Send class="h-4 w-4" aria-hidden="true" />
+            Continue on WhatsApp
           </button>
           <p class="text-center text-[11px] leading-4 text-slate-500">
-            Delivered to our team via WhatsApp Business API. Your WhatsApp stays closed.
+            Opens WhatsApp with your message ready — no Meta Business API needed.
           </p>
         </form>
       </div>
@@ -189,7 +166,7 @@ onBeforeUnmount(() => {
 
     <button
       type="button"
-      class="group flex items-center gap-3 rounded-full bg-[#25d366] p-1 pr-5 text-white shadow-xl shadow-emerald-950/20 transition hover:-translate-y-0.5 hover:bg-[#1ebe57] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25d366]"
+      class="animate-float animate-soft-pulse group flex items-center gap-3 rounded-full bg-[#25d366] p-1 pr-5 text-white shadow-xl shadow-emerald-950/20 transition hover:-translate-y-0.5 hover:bg-[#1ebe57] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#25d366]"
       :aria-expanded="open"
       aria-label="Chat with Ideal Energy"
       @click="open ? (open = false) : openChat()"

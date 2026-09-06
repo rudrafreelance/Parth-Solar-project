@@ -20,7 +20,7 @@ const benefits = [
           />
         </div>
         <div class="absolute -bottom-6 -right-2 max-w-[15rem] rounded-3xl bg-lime-300 p-5 text-left text-emerald-950 shadow-xl sm:right-6 sm:p-6">
-          <p class="text-4xl font-bold tracking-tight">10+</p>
+          <p class="text-4xl font-bold tracking-tight">8+</p>
           <p class="mt-1 text-sm font-semibold leading-5">years building a cleaner energy future</p>
         </div>
         <button

@@ -1,5 +1,12 @@
 <script setup>
 import { ArrowRight, Phone } from '@lucide/vue'
+import { ADMIN_TEL_HREF, openWhatsApp } from '@/lib/contact'
+
+function bookSiteSurvey() {
+  openWhatsApp(
+    'Hi Ideal Energy — I\'d like to book a free site survey for solar at my property.',
+  )
+}
 </script>
 
 <template>
@@ -16,11 +23,18 @@ import { ArrowRight, Phone } from '@lucide/vue'
           Book a complimentary site survey and receive clear production estimates, honest pricing, and expert answers.
         </p>
         <div class="mt-9 flex flex-col justify-center gap-4 sm:flex-row">
-          <a href="#contact-form" class="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-950 px-7 py-4 font-bold text-white transition hover:-translate-y-0.5 hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">
+          <button
+            type="button"
+            class="inline-flex items-center justify-center gap-2 rounded-full bg-emerald-950 px-7 py-4 font-bold text-white transition hover:-translate-y-0.5 hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+            @click="bookSiteSurvey"
+          >
             Book Free Site Survey
             <ArrowRight class="h-5 w-5" aria-hidden="true" />
-          </a>
-          <a href="tel:+18005557652" class="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-950/20 bg-white/35 px-7 py-4 font-bold text-emerald-950 transition hover:-translate-y-0.5 hover:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700">
+          </button>
+          <a
+            :href="ADMIN_TEL_HREF"
+            class="inline-flex items-center justify-center gap-2 rounded-full border border-emerald-950/20 bg-white/35 px-7 py-4 font-bold text-emerald-950 transition hover:-translate-y-0.5 hover:bg-white/60 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700"
+          >
             <Phone class="h-5 w-5" aria-hidden="true" />
             Call Now
           </a>

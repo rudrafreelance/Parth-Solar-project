@@ -6,7 +6,6 @@ import TrustGrid from '@/components/about/TrustGrid.vue'
 import AboutProcess from '@/components/about/AboutProcess.vue'
 import StatsSection from '@/components/about/StatsSection.vue'
 import CertificationsSection from '@/components/about/CertificationsSection.vue'
-import TeamSection from '@/components/about/TeamSection.vue'
 import AboutCTA from '@/components/about/AboutCTA.vue'
 </script>
 
@@ -19,7 +18,6 @@ import AboutCTA from '@/components/about/AboutCTA.vue'
     <AboutProcess />
     <StatsSection />
     <CertificationsSection />
-    <TeamSection />
     <AboutCTA />
   </main>
 </template>

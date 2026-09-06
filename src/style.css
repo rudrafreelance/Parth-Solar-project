@@ -20,7 +20,7 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    scroll-padding-top: 5rem;
+    scroll-padding-top: 7rem;
   }
 
   body {
@@ -49,6 +49,53 @@
   }
 }
 
+@layer utilities {
+  .animate-float {
+    animation: float-y 4.5s ease-in-out infinite;
+  }
+
+  .animate-soft-pulse {
+    animation: soft-pulse 3.2s ease-in-out infinite;
+  }
+}
+
+@keyframes float-y {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes soft-pulse {
+  0%,
+  100% {
+    box-shadow: 0 12px 30px -12px rgba(7, 28, 22, 0.35);
+  }
+  50% {
+    box-shadow: 0 16px 36px -10px rgba(37, 211, 102, 0.45);
+  }
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease;
+}
+
+.page-enter-from {
+  opacity: 0;
+  transform: translateY(10px);
+}
+
+.page-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -64,6 +111,16 @@
   }
 
   [data-aos] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .page-enter-active,
+  .page-leave-active,
+  .animate-float,
+  .animate-soft-pulse {
+    animation: none !important;
+    transition: none !important;
     opacity: 1 !important;
     transform: none !important;
   }

@@ -13,7 +13,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <main class="relative min-h-[100svh] overflow-hidden pt-20 text-white">
+  <main class="relative min-h-[100svh] overflow-hidden pt-28 text-white">
     <!-- Full-bleed hero visual -->
     <div class="absolute inset-0" aria-hidden="true">
       <img
@@ -43,11 +43,11 @@ onMounted(() => {
           <ArrowRight class="h-5 w-5" aria-hidden="true" />
         </RouterLink>
         <a
-          href="tel:+918003080020"
+          href="tel:+916355859771"
           class="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 bg-white/5 px-7 py-4 text-sm font-bold text-white backdrop-blur-sm transition hover:bg-white/10"
         >
           <Phone class="h-4 w-4" aria-hidden="true" />
-          Call 80030 80020
+          Call 63558 59771
         </a>
       </div>
 

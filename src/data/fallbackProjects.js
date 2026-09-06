@@ -62,7 +62,7 @@ export const fallbackProjects = [
     output: '320 kW',
     type: 'Commercial',
     description: 'Reliable solar generation supporting critical campus operations throughout the day.',
-    image_url: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=1400&q=85',
+    image_url: 'https://images.unsplash.com/photo-1613665813446-82a78c468a1d?auto=format&fit=crop&w=1400&q=85',
     featured: false,
     sort_order: 6,
   },

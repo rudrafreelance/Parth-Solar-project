@@ -91,8 +91,8 @@ export function organizationJsonLd() {
     url: siteUrl(),
     logo: `${siteUrl()}/favicon.svg`,
     description: DEFAULT_DESCRIPTION,
-    email: 'hello@idealenergy.in',
-    telephone: '+18005557652',
+    email: 'idealeneergy@gmail.com',
+    telephone: '+916355859771',
     sameAs: [
       'https://www.instagram.com',
       'https://www.linkedin.com',

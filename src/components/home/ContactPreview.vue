@@ -7,8 +7,8 @@ import { submitLead } from '@/lib/submitLead'
 const router = useRouter()
 
 const contactDetails = [
-  { icon: Phone, label: 'Call us', value: '80030 80020', href: 'tel:+918003080020' },
-  { icon: Mail, label: 'Email us', value: 'hello@idealenergy.in', href: 'mailto:hello@idealenergy.in' },
+  { icon: Phone, label: 'Call us', value: '63558 59771', href: 'tel:+916355859771' },
+  { icon: Mail, label: 'Email us', value: 'idealeneergy@gmail.com', href: 'mailto:idealeneergy@gmail.com' },
   { icon: MapPin, label: 'Visit us', value: 'Ahmedabad, Gujarat, India', href: null },
   { icon: Clock3, label: 'Office hours', value: 'Mon–Sat, 9:00 AM–7:00 PM', href: null },
 ]

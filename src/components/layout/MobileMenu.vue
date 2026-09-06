@@ -22,11 +22,11 @@ const props = defineProps({
   },
   phoneHref: {
     type: String,
-    default: 'tel:+18005557652',
+    default: 'tel:+916355859771',
   },
   whatsappHref: {
     type: String,
-    default: 'https://wa.me/18005557652',
+    default: 'https://wa.me/916355859771',
   },
 })
 
@@ -163,13 +163,13 @@ watch(
                 >
                   <ul class="min-h-0 space-y-1 overflow-hidden pl-4">
                     <li v-for="service in services" :key="service.label">
-                      <a
-                        :href="service.href"
+                      <RouterLink
+                        :to="service.href"
                         class="block rounded-xl px-4 py-3 text-sm font-medium text-slate-600 transition hover:bg-lime-50 hover:text-emerald-800 focus-visible:outline-2 focus-visible:outline-emerald-600"
                         @click="navigateTo('services')"
                       >
                         {{ service.label }}
-                      </a>
+                      </RouterLink>
                     </li>
                   </ul>
                 </div>

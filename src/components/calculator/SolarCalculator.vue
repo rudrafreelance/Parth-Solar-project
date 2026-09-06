@@ -3,6 +3,7 @@ import { computed, nextTick, reactive, ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { ArrowRight, Calculator, Leaf, IndianRupee, Sun } from '@lucide/vue'
 import { BILL_PERIODS, estimateSolarSavings, formatInr } from '@/lib/solarEstimate'
+import { openWhatsApp } from '@/lib/contact'
 import { notifyCalculatorEstimate, submitLead } from '@/lib/submitLead'
 
 const router = useRouter()
@@ -77,16 +78,33 @@ async function showEstimate() {
     status.value = ''
     highlightPanel.value = true
 
+    const e = estimate.value
+    const waMessage = [
+      'Hi Ideal Energy — I checked the solar calculator',
+      `Bill: ${formatInr(e.billAmount)} (${e.billPeriodLabel})`,
+      `≈ ${formatInr(e.monthlyBill)}/month`,
+      `Property: ${e.propertyType}`,
+      `Suggested system: ${e.systemKw} kW`,
+      `Est. subsidy*: ${formatInr(e.subsidy)}`,
+      `Est. net investment: ${formatInr(e.netCost)}`,
+      `Est. yearly savings: ${formatInr(e.annualSavings)}`,
+      `Est. payback: ${e.paybackYears ?? '—'} years`,
+      '',
+      'Please share a free solar plan.',
+    ].join('\n')
+
+    openWhatsApp(waMessage)
+
     notifyCalculatorEstimate({
-      billAmount: estimate.value.billAmount,
-      billPeriodMonths: estimate.value.billPeriodMonths,
-      billPeriodLabel: estimate.value.billPeriodLabel,
-      monthlyBill: estimate.value.monthlyBill,
-      propertyType: estimate.value.propertyType,
-      systemKw: estimate.value.systemKw,
-      monthlySavings: estimate.value.monthlySavings,
-      netCost: estimate.value.netCost,
-      paybackYears: estimate.value.paybackYears,
+      billAmount: e.billAmount,
+      billPeriodMonths: e.billPeriodMonths,
+      billPeriodLabel: e.billPeriodLabel,
+      monthlyBill: e.monthlyBill,
+      propertyType: e.propertyType,
+      systemKw: e.systemKw,
+      monthlySavings: e.monthlySavings,
+      netCost: e.netCost,
+      paybackYears: e.paybackYears,
     }).catch(() => {})
 
     await nextTick()
@@ -151,7 +169,7 @@ async function requestFullPlan() {
 
 <template>
   <div class="mx-auto grid max-w-7xl gap-10 px-5 py-14 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:gap-14 lg:px-12 lg:py-20">
-    <section class="text-left">
+    <section class="text-left" data-aos="fade-up">
       <p class="inline-flex items-center gap-2 text-sm font-bold uppercase tracking-[0.2em] text-emerald-700">
         <Calculator class="h-4 w-4" aria-hidden="true" />
         Solar savings calculator
@@ -163,7 +181,7 @@ async function requestFullPlan() {
         Enter the amount on your electricity bill — monthly or 2-month (common in Gujarat) — for a quick Ideal Energy estimate.
       </p>
 
-      <div class="mt-10 space-y-8 pb-28 sm:pb-10">
+      <div class="mt-10 space-y-8 pb-28 sm:pb-10" data-aos="fade-up" data-aos-delay="100">
         <fieldset>
           <legend class="text-sm font-bold text-emerald-950">Your bill comes</legend>
           <div class="mt-3 grid gap-3 sm:grid-cols-2">
@@ -325,6 +343,8 @@ async function requestFullPlan() {
     <aside
       ref="resultsPanel"
       class="scroll-mt-28 rounded-[2rem] bg-[#071c16] p-6 text-white transition ring-offset-4 sm:p-8"
+      data-aos="fade-left"
+      data-aos-delay="150"
       :class="highlightPanel ? 'ring-4 ring-lime-300' : 'ring-0'"
     >
       <p class="text-sm font-bold uppercase tracking-[0.18em] text-lime-300">Your estimate</p>
