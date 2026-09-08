@@ -7,13 +7,15 @@ import WhatsAppChat from '@/components/layout/WhatsAppChat.vue'
 import { useAosRefresh } from '@/composables/useAosRefresh'
 
 const route = useRoute()
-const isAdmin = computed(() => route.path.startsWith('/admin'))
+const isPrivateApp = computed(
+  () => route.path.startsWith('/admin') || route.path.startsWith('/billing'),
+)
 
 useAosRefresh()
 </script>
 
 <template>
-  <template v-if="isAdmin">
+  <template v-if="isPrivateApp">
     <RouterView />
   </template>
   <template v-else>

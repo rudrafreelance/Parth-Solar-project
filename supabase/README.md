@@ -39,6 +39,13 @@ A file at `supabase/.env` will be ignored.
    - `/admin/leads` Website contact form enquiries
    - `/admin/settings` Backend connection checklist
 
+## Billing portal (`/billing`)
+Same auth user as admin. Public nav does **not** link here.
+
+1. Run `billing-schema.sql` in Supabase SQL Editor (creates parties, items, bills, storage bucket).
+2. Open `/billing/login` on the website
+3. Sign in → dashboard, bills, parties, items, PDF invoices
+
 If you already ran the old schema, also run `leads.sql` (or just `add-lead-attribution.sql` for UTM columns).
 
 Ads tip: send traffic with UTMs, e.g.

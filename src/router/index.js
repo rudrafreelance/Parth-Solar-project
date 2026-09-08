@@ -230,22 +230,164 @@ const router = createRouter({
         },
       ],
     },
+    {
+      path: '/billing',
+      component: () => import('@/layouts/BillingLayout.vue'),
+      meta: {
+        isBilling: true,
+        seo: {
+          title: 'Billing | Ideal Energy',
+          description: 'Ideal Energy private billing portal.',
+          path: '/billing',
+          robots: 'noindex,nofollow',
+        },
+      },
+      children: [
+        {
+          path: 'login',
+          name: 'billing-login',
+          component: () => import('@/views/billing/BillingLogin.vue'),
+          meta: {
+            isBilling: true,
+            publicBilling: true,
+            seo: {
+              title: 'Billing Login | Ideal Energy',
+              description: 'Secure login for Ideal Energy billing.',
+              path: '/billing/login',
+              robots: 'noindex,nofollow',
+            },
+          },
+        },
+        {
+          path: '',
+          name: 'billing-dashboard',
+          component: () => import('@/views/billing/BillingDashboard.vue'),
+          meta: {
+            isBilling: true,
+            requiresAuth: true,
+            seo: {
+              title: 'Billing Dashboard | Ideal Energy',
+              description: 'Ideal Energy billing dashboard.',
+              path: '/billing',
+              robots: 'noindex,nofollow',
+            },
+          },
+        },
+        {
+          path: 'bills',
+          name: 'billing-bills',
+          component: () => import('@/views/billing/BillingBills.vue'),
+          meta: {
+            isBilling: true,
+            requiresAuth: true,
+            seo: {
+              title: 'Bills | Ideal Energy Billing',
+              description: 'Sale and purchase invoices.',
+              path: '/billing/bills',
+              robots: 'noindex,nofollow',
+            },
+          },
+        },
+        {
+          path: 'bills/new/:type',
+          name: 'billing-bill-new',
+          component: () => import('@/views/billing/BillingBillForm.vue'),
+          meta: {
+            isBilling: true,
+            requiresAuth: true,
+            seo: {
+              title: 'New Bill | Ideal Energy Billing',
+              description: 'Create a sale or purchase invoice.',
+              path: '/billing/bills',
+              robots: 'noindex,nofollow',
+            },
+          },
+        },
+        {
+          path: 'bills/:id/edit',
+          name: 'billing-bill-edit',
+          component: () => import('@/views/billing/BillingBillForm.vue'),
+          meta: {
+            isBilling: true,
+            requiresAuth: true,
+            seo: {
+              title: 'Edit Bill | Ideal Energy Billing',
+              description: 'Edit an Ideal Energy invoice.',
+              path: '/billing/bills',
+              robots: 'noindex,nofollow',
+            },
+          },
+        },
+        {
+          path: 'parties',
+          name: 'billing-parties',
+          component: () => import('@/views/billing/BillingParties.vue'),
+          meta: {
+            isBilling: true,
+            requiresAuth: true,
+            seo: {
+              title: 'Parties | Ideal Energy Billing',
+              description: 'Customers and suppliers.',
+              path: '/billing/parties',
+              robots: 'noindex,nofollow',
+            },
+          },
+        },
+        {
+          path: 'items',
+          name: 'billing-items',
+          component: () => import('@/views/billing/BillingItems.vue'),
+          meta: {
+            isBilling: true,
+            requiresAuth: true,
+            seo: {
+              title: 'Items | Ideal Energy Billing',
+              description: 'Invoice catalog items.',
+              path: '/billing/items',
+              robots: 'noindex,nofollow',
+            },
+          },
+        },
+        {
+          path: 'settings',
+          name: 'billing-settings',
+          component: () => import('@/views/billing/BillingSettings.vue'),
+          meta: {
+            isBilling: true,
+            requiresAuth: true,
+            seo: {
+              title: 'Billing Settings | Ideal Energy',
+              description: 'Company profile for invoices.',
+              path: '/billing/settings',
+              robots: 'noindex,nofollow',
+            },
+          },
+        },
+      ],
+    },
   ],
 })
 
 router.beforeEach(async (to) => {
-  if (!to.path.startsWith('/admin')) return true
+  const isAdminArea = to.path.startsWith('/admin')
+  const isBillingArea = to.path.startsWith('/billing')
+  if (!isAdminArea && !isBillingArea) return true
 
   const { initAuth, isAuthenticated, authReady } = useAdminAuth()
   if (!authReady.value) await initAuth()
 
-  if (to.meta.publicAdmin) {
-    if (isAuthenticated.value) return { name: 'admin-dashboard' }
+  if (to.meta.publicAdmin || to.meta.publicBilling) {
+    if (isAuthenticated.value) {
+      return { name: isBillingArea ? 'billing-dashboard' : 'admin-dashboard' }
+    }
     return true
   }
 
   if (to.meta.requiresAuth && !isAuthenticated.value) {
-    return { name: 'admin-login', query: { redirect: to.fullPath } }
+    return {
+      name: isBillingArea ? 'billing-login' : 'admin-login',
+      query: { redirect: to.fullPath },
+    }
   }
 
   return true
