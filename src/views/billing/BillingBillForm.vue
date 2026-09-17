@@ -7,6 +7,7 @@ import { calcBillTotals, calcLine, financialYearForDate } from '@/lib/billingMat
 import { generateAndUploadBillPdf } from '@/lib/billingPdf'
 import { buildWhatsAppLink } from '@/lib/billingWhatsapp'
 import { supabase } from '@/lib/supabase'
+import CurrencyInput from '@/components/ui/CurrencyInput.vue'
 
 const emptyLine = () => ({
   item_id: '',
@@ -568,13 +569,11 @@ async function onSave(generatePdf) {
             </label>
             <label class="text-xs font-bold text-emerald-950">
               Rate
-              <input
-                :value="line.rate"
-                type="number"
-                min="0"
-                step="0.01"
+              <CurrencyInput
+                :model-value="line.rate"
                 class="mt-1 w-full rounded-lg border border-slate-200 bg-white px-2 py-2"
-                @input="updateLine(index, { rate: $event.target.value })"
+                placeholder="0.00"
+                @update:model-value="updateLine(index, { rate: $event })"
               />
             </label>
             <div class="flex items-end justify-between gap-2 sm:col-span-2">

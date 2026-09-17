@@ -3,6 +3,8 @@ import { onMounted, reactive, ref } from 'vue'
 import { Pencil, Plus, Trash2 } from '@lucide/vue'
 import { useAdminAuth } from '@/composables/useAdminAuth'
 import { supabase } from '@/lib/supabase'
+import { formatInrPlain } from '@/lib/billingMath'
+import CurrencyInput from '@/components/ui/CurrencyInput.vue'
 
 const blank = {
   name: '',
@@ -118,12 +120,10 @@ async function onDelete(row) {
       </label>
       <label class="text-sm font-bold text-emerald-950">
         Default rate
-        <input
+        <CurrencyInput
           v-model="form.default_rate"
-          type="number"
-          min="0"
-          step="0.01"
           class="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-3 py-2.5"
+          placeholder="0.00"
         />
       </label>
       <label class="text-sm font-bold text-emerald-950">
@@ -183,7 +183,7 @@ async function onDelete(row) {
               <td class="px-4 py-3 font-semibold">{{ row.name }}</td>
               <td class="px-4 py-3">{{ row.hsn || '—' }}</td>
               <td class="px-4 py-3">{{ row.unit }}</td>
-              <td class="px-4 py-3">{{ Number(row.default_rate).toFixed(2) }}</td>
+              <td class="px-4 py-3">{{ formatInrPlain(row.default_rate) }}</td>
               <td class="px-4 py-3">{{ row.default_gst_rate }}%</td>
               <td class="px-4 py-3">
                 <div class="flex gap-2" @click.stop>

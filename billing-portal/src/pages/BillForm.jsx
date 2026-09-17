@@ -44,6 +44,8 @@ export default function BillForm() {
   const [company, setCompany] = useState(null)
   const [existingPath, setExistingPath] = useState('')
   const [existingId, setExistingId] = useState(id || '')
+  const [pdfUrl, setPdfUrl] = useState('')
+  const [billSaved, setBillSaved] = useState(false)
 
   const [form, setForm] = useState({
     bill_type: billType || 'sale',
@@ -334,15 +336,20 @@ export default function BillForm() {
           existingPath: existingPath || undefined,
         })
         setExistingPath(uploaded.pdf_path)
+        setPdfUrl(uploaded.pdf_url)
         const { error: pdfErr } = await supabase
           .from('bills')
           .update({ pdf_url: uploaded.pdf_url, pdf_path: uploaded.pdf_path })
           .eq('id', billId)
         if (pdfErr) throw pdfErr
+        // Open PDF in new tab so user can verify / download
         window.open(uploaded.pdf_url, '_blank', 'noopener,noreferrer')
+        // Stay on page so user can share via WhatsApp with the PDF link
+        setBillSaved(true)
+      } else {
+        setBillSaved(true)
+        navigate('/bills')
       }
-
-      navigate('/bills')
     } catch (err) {
       setError(err.message || 'Could not save bill')
     } finally {
@@ -619,14 +626,25 @@ export default function BillForm() {
           <a
             href={buildWhatsAppLink(
               form.party_phone,
-              `Hello ${form.party_name}, please find Ideal Energy invoice ${form.invoice_no}.`,
+              pdfUrl
+                ? `Hello ${form.party_name}, please find your Ideal Energy invoice ${form.invoice_no}.\nDownload PDF: ${pdfUrl}`
+                : `Hello ${form.party_name}, please find Ideal Energy invoice ${form.invoice_no}.`,
             )}
             target="_blank"
             rel="noreferrer"
             className="rounded-full bg-[#25d366] px-5 py-3 text-sm font-bold text-white"
           >
-            WhatsApp party
+            {pdfUrl ? '📎 WhatsApp with PDF' : 'WhatsApp party'}
           </a>
+        )}
+        {billSaved && (
+          <button
+            type="button"
+            onClick={() => navigate('/bills')}
+            className="rounded-full border border-emerald-950/15 bg-white px-5 py-3 text-sm font-bold text-emerald-950"
+          >
+            Go to bills →
+          </button>
         )}
       </div>
     </div>

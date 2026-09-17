@@ -34,6 +34,42 @@ export function formatInrPlain(value) {
   }).format(Number(value) || 0)
 }
 
+/** Format a number or string into Indian currency notation with commas, keeping decimals */
+export function formatIndianNumber(val) {
+  if (val === null || val === undefined || val === '') return ''
+  const str = String(val).trim()
+  if (!str) return ''
+  const cleaned = str.replace(/,/g, '').replace(/[^0-9.-]/g, '')
+  if (!cleaned) return ''
+  const isNegative = cleaned.startsWith('-')
+  const abs = isNegative ? cleaned.slice(1) : cleaned
+  const dotIndex = abs.indexOf('.')
+  let intPart = dotIndex >= 0 ? abs.slice(0, dotIndex) : abs
+  const decPart = dotIndex >= 0 ? abs.slice(dotIndex + 1) : null
+  if (intPart.length > 1) {
+    intPart = intPart.replace(/^0+/, '') || '0'
+  }
+  let formattedInt = ''
+  if (intPart.length > 3) {
+    const lastThree = intPart.slice(-3)
+    const other = intPart.slice(0, -3)
+    formattedInt = other.replace(/\B(?=(\d{2})+(?!\d))/g, ',') + ',' + lastThree
+  } else {
+    formattedInt = intPart || (dotIndex >= 0 ? '0' : '')
+  }
+  let res = (isNegative ? '-' : '') + formattedInt
+  if (decPart !== null) res += '.' + decPart
+  return res
+}
+
+/** Parse a comma-formatted or raw string into a clean float number */
+export function parseIndianNumber(val) {
+  if (val === null || val === undefined || val === '') return 0
+  const cleaned = String(val).replace(/,/g, '').trim()
+  const num = parseFloat(cleaned)
+  return isNaN(num) ? 0 : num
+}
+
 const ONES = [
   '',
   'One',
