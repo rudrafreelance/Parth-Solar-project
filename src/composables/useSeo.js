@@ -7,7 +7,7 @@ function siteUrl() {
   const fromEnv = import.meta.env.VITE_SITE_URL
   if (fromEnv) return fromEnv.replace(/\/$/, '')
   if (typeof window !== 'undefined') return window.location.origin
-  return 'https://idealenergy.in'
+  return 'https://ideal-energy.in'
 }
 
 function upsertMeta(selector, attributes) {
@@ -81,25 +81,193 @@ export function applySeo(meta = {}) {
   } else {
     removeJsonLd('seo-jsonld')
   }
+
+  if (meta.jsonLd2) {
+    upsertJsonLd('seo-jsonld-2', meta.jsonLd2)
+  } else {
+    removeJsonLd('seo-jsonld-2')
+  }
 }
 
+/**
+ * LocalBusiness schema — more specific and SEO-relevant than plain Organization
+ * for a solar installation company with a physical presence in Ahmedabad.
+ * Update social media URLs once you have the actual handles.
+ */
 export function organizationJsonLd() {
   return {
     '@context': 'https://schema.org',
-    '@type': 'Organization',
+    '@type': ['LocalBusiness', 'ProfessionalService'],
     name: SITE_NAME,
     url: siteUrl(),
     logo: `${siteUrl()}/favicon.svg`,
-    description: DEFAULT_DESCRIPTION,
+    image: `${siteUrl()}/og-image.svg`,
+    description:
+      'Ideal Energy is an Ahmedabad-based solar energy company offering rooftop solar installation, commercial & industrial solar systems, battery storage, and solar pump solutions across Gujarat with PM Surya Ghar Yojana subsidy guidance.',
     email: 'idealeneergy@gmail.com',
     telephone: '+916355859771',
-    sameAs: [
-      'https://www.instagram.com',
-      'https://www.linkedin.com',
-      'https://www.facebook.com',
-      'https://www.youtube.com',
+    address: {
+      '@type': 'PostalAddress',
+      addressLocality: 'Ahmedabad',
+      addressRegion: 'Gujarat',
+      addressCountry: 'IN',
+    },
+    geo: {
+      '@type': 'GeoCoordinates',
+      latitude: 23.0225,
+      longitude: 72.5714,
+    },
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        opens: '09:00',
+        closes: '19:00',
+      },
     ],
-    areaServed: 'IN',
-    knowsAbout: ['Solar energy', 'Rooftop solar', 'Battery storage', 'Commercial solar'],
+    areaServed: {
+      '@type': 'State',
+      name: 'Gujarat',
+      containedInPlace: {
+        '@type': 'Country',
+        name: 'India',
+      },
+    },
+    knowsAbout: [
+      'Rooftop solar installation',
+      'Commercial solar systems',
+      'Industrial solar systems',
+      'Battery storage solutions',
+      'Solar water pumps',
+      'PM Surya Ghar Yojana subsidy',
+      'Net metering',
+      'Solar AMC',
+    ],
+    // TODO: Replace with actual social media profile URLs for Ideal Energy
+    sameAs: [
+      'https://www.instagram.com/idealeneergy?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==', // update with actual handle
+      'https://www.facebook.com/profile.php?id=61592209329460', // update with actual handle
+      'https://www.linkedin.com/company/idealenergy', // update with actual handle
+    ],
+  }
+}
+
+/**
+ * Service schema — use on /services and individual service pages.
+ * Helps Google show rich results for specific service queries.
+ */
+export function serviceJsonLd() {
+  const base = siteUrl()
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: 'Solar Services by Ideal Energy',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        item: {
+          '@type': 'Service',
+          name: 'Residential Rooftop Solar',
+          description:
+            'Complete rooftop solar panel installation for homes in Gujarat with PM Surya Ghar Yojana subsidy support, net metering, and long-term AMC.',
+          provider: { '@type': 'LocalBusiness', name: SITE_NAME, url: base },
+          areaServed: 'Gujarat, India',
+          url: `${base}/services/residential-rooftop`,
+        },
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        item: {
+          '@type': 'Service',
+          name: 'Commercial & Industrial Solar',
+          description:
+            'Large-scale rooftop solar systems for factories, offices, and commercial buildings in Gujarat to reduce electricity costs by up to 90%.',
+          provider: { '@type': 'LocalBusiness', name: SITE_NAME, url: base },
+          areaServed: 'Gujarat, India',
+          url: `${base}/services/commercial-solar`,
+        },
+      },
+      {
+        '@type': 'ListItem',
+        position: 3,
+        item: {
+          '@type': 'Service',
+          name: 'Solar Water Pumps',
+          description:
+            'Agricultural solar pump solutions for farmers in Gujarat — reduce diesel costs and get government subsidies.',
+          provider: { '@type': 'LocalBusiness', name: SITE_NAME, url: base },
+          areaServed: 'Gujarat, India',
+          url: `${base}/services/solar-pumps`,
+        },
+      },
+      {
+        '@type': 'ListItem',
+        position: 4,
+        item: {
+          '@type': 'Service',
+          name: 'Battery Storage Solutions',
+          description:
+            'Solar battery storage systems to store excess energy and power your home or business during outages and peak hours.',
+          provider: { '@type': 'LocalBusiness', name: SITE_NAME, url: base },
+          areaServed: 'Gujarat, India',
+          url: `${base}/services/battery-storage`,
+        },
+      },
+    ],
+  }
+}
+
+/**
+ * FAQ schema — use on home page.
+ * Helps Google show FAQ rich results directly in search for solar-related queries.
+ */
+export function faqJsonLd() {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: [
+      {
+        '@type': 'Question',
+        name: 'How much does rooftop solar cost in Gujarat?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Rooftop solar in Gujarat typically costs ₹40,000–₹60,000 per kW after PM Surya Ghar Yojana subsidies. A 3 kW system for a home costs around ₹1.2–1.5 lakh after subsidy. Ideal Energy provides transparent pricing and free site assessment.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'What is PM Surya Ghar Yojana and how can I get the subsidy?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'PM Surya Ghar Muft Bijli Yojana is a central government scheme providing up to ₹78,000 subsidy for residential rooftop solar installations. Ideal Energy handles all paperwork and subsidy application on your behalf.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How many years does solar pay back in Gujarat?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'With Gujarat electricity rates and generous sunlight (5.5+ peak sun hours/day), most rooftop solar systems pay back in 4–6 years. After that, you get free electricity for 20+ years.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'Does Ideal Energy provide solar installation in Ahmedabad?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Yes, Ideal Energy is headquartered in Ahmedabad and provides residential, commercial, and industrial solar installation across Gujarat. Call +91 63558 59771 for a free consultation.',
+        },
+      },
+      {
+        '@type': 'Question',
+        name: 'How long does solar panel installation take?',
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: 'Ideal Energy completes most residential solar installations in 1–3 days after site survey and subsidy approval. Commercial projects may take 5–15 days depending on system size.',
+        },
+      },
+    ],
   }
 }

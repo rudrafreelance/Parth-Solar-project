@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
 import { useAdminAuth } from '@/composables/useAdminAuth'
-import { applySeo, organizationJsonLd } from '@/composables/useSeo'
+import { applySeo, organizationJsonLd, faqJsonLd, serviceJsonLd } from '@/composables/useSeo'
 import { captureLeadAttribution } from '@/composables/useLeadAttribution'
 
 const router = createRouter({
@@ -18,9 +18,9 @@ const router = createRouter({
       component: Home,
       meta: {
         seo: {
-          title: 'Ideal Energy | Premium Solar Solutions',
+          title: 'Ideal Energy | Solar Panels in Gujarat | Rooftop Solar Ahmedabad',
           description:
-            'Ideal Energy designs and installs premium residential, commercial, and industrial solar systems with clear pricing and expert support.',
+            'Ideal Energy installs rooftop solar panels for homes and businesses across Gujarat. Save up to 90% on electricity bills. PM Surya Ghar Yojana subsidy support. Free site assessment — call 63558 59771.',
           path: '/',
         },
       },
@@ -31,9 +31,9 @@ const router = createRouter({
       component: () => import('@/views/About.vue'),
       meta: {
         seo: {
-          title: 'About Ideal Energy | Our Story, Team & Mission',
+          title: 'About Ideal Energy | Ahmedabad Solar Company | Our Story',
           description:
-            'Learn how Ideal Energy delivers trusted solar engineering, certified installation, and long-term support for cleaner energy.',
+            'Ideal Energy is a trusted solar energy company in Ahmedabad, Gujarat with 8+ years of experience installing residential, commercial, and industrial solar systems. Meet our certified team.',
           path: '/about',
         },
       },
@@ -44,9 +44,9 @@ const router = createRouter({
       component: () => import('@/views/Services.vue'),
       meta: {
         seo: {
-          title: 'Solar Services | Residential, Commercial & Industrial',
+          title: 'Solar Services Gujarat | Residential, Commercial & Industrial Solar | Ideal Energy',
           description:
-            'Explore Ideal Energy solar services including rooftop solar, battery storage, solar pumps, maintenance, and AMC support.',
+            'Ideal Energy offers complete solar solutions in Gujarat — residential rooftop solar with PM Surya Ghar Yojana subsidy, commercial & industrial solar, battery storage, solar pumps, and AMC maintenance.',
           path: '/services',
         },
       },
@@ -69,9 +69,9 @@ const router = createRouter({
       component: () => import('@/views/Projects.vue'),
       meta: {
         seo: {
-          title: 'Solar Projects Gallery | Ideal Energy Installations',
+          title: 'Solar Projects in Gujarat | Ideal Energy Installation Gallery',
           description:
-            'Browse real Ideal Energy solar projects across homes, businesses, and industrial sites with verified installation photography.',
+            'View completed solar installations by Ideal Energy across Gujarat — residential homes in Ahmedabad, commercial factories, and industrial sites with real photos and system details.',
           path: '/projects',
         },
       },
@@ -82,7 +82,7 @@ const router = createRouter({
       component: () => import('@/views/Calculator.vue'),
       meta: {
         seo: {
-          title: 'Solar Savings Calculator | Ideal Energy',
+          title: 'Solar Savings Calculator Gujarat | How Much Can You Save? | Ideal Energy',
           description:
             'Estimate your rooftop solar system size, monthly savings, and payback with Ideal Energy’s free solar calculator.',
           path: '/calculator',
@@ -402,7 +402,9 @@ router.afterEach((to) => {
 
   applySeo({
     ...seo,
+    // Home page: LocalBusiness schema + FAQ schema (two rich result opportunities)
     jsonLd: to.name === 'home' ? organizationJsonLd() : null,
+    jsonLd2: to.name === 'home' ? faqJsonLd() : to.name === 'services' ? serviceJsonLd() : null,
   })
 })
 

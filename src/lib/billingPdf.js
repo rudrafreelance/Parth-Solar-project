@@ -812,9 +812,6 @@ async function buildPurchasePdf(company, bill, lines) {
   return doc
 }
 
-  return doc
-}
-
 export async function generateAndUploadBillPdf({ userId, company, bill, lines, existingPath }) {
   const doc = bill.bill_type === 'purchase' ? await buildPurchasePdf(company, bill, lines) : buildSalePdf(company, bill, lines)
   const blob = doc.output('blob')

@@ -10,8 +10,8 @@ export const ADMIN_EMAIL_HREF = `mailto:${ADMIN_EMAIL}`
 
 /** Update these to your real profile URLs when ready */
 export const SOCIAL_LINKS = [
-  { label: 'Instagram', href: 'https://www.instagram.com/', icon: 'instagram' },
-  { label: 'Facebook', href: 'https://www.facebook.com/', icon: 'facebook' },
+  { label: 'Instagram', href: 'https://www.instagram.com/idealeneergy?utm_source=ig_web_button_share_sheet&stkn=ZDNlZDc0MzIxNw==', icon: 'instagram' },
+  { label: 'Facebook', href: 'https://www.facebook.com/profile.php?id=61592209329460', icon: 'facebook' },
   { label: 'YouTube', href: 'https://www.youtube.com/', icon: 'youtube' },
   { label: 'LinkedIn', href: 'https://www.linkedin.com/', icon: 'linkedin' },
 ]

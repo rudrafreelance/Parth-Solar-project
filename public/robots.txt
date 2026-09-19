@@ -2,5 +2,7 @@ User-agent: *
 Allow: /
 Disallow: /admin
 Disallow: /admin/
+Disallow: /billing
+Disallow: /billing/
 
-Sitemap: /sitemap.xml
+Sitemap: https://ideal-energy.in/sitemap.xml

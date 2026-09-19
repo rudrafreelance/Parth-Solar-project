@@ -17,6 +17,7 @@ const form = reactive({
   firstName: '',
   lastName: '',
   phone: '',
+  interest: '',
   address: '',
   message: '',
 })
@@ -50,6 +51,7 @@ async function onSubmit() {
       firstName: form.firstName,
       lastName: form.lastName,
       phone: `+91${phoneDigits.value}`,
+      interest: form.interest,
       address: form.address,
       message: form.message,
       sourceFallback: 'website_contact',
@@ -145,6 +147,22 @@ async function onSubmit() {
               />
             </div>
             <span class="mt-2 block text-xs text-slate-500">Exactly 10 digits. Example: 9876543210</span>
+          </label>
+          <label class="block sm:col-span-2">
+            <span class="text-sm font-bold text-emerald-950">Interested in</span>
+            <select
+              v-model="form.interest"
+              name="interest"
+              required
+              class="mt-2 w-full rounded-xl border border-slate-200 bg-slate-50 px-4 py-3.5 text-emerald-950 outline-none transition focus:border-emerald-600 focus:ring-4 focus:ring-emerald-600/10"
+            >
+              <option value="" disabled>Select type of installation</option>
+              <option value="residential">🏠 Residential — Home rooftop solar</option>
+              <option value="commercial">🏢 Commercial — Offices, shops, factories</option>
+              <option value="industrial">🏭 Industrial — Large-scale systems</option>
+              <option value="agricultural">🌾 Agricultural — Solar pumps for farming</option>
+              <option value="battery_storage">🔋 Battery Storage — Energy backup</option>
+            </select>
           </label>
           <label class="block sm:col-span-2">
             <span class="text-sm font-bold text-emerald-950">Property address / PIN code</span>
