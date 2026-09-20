@@ -46,6 +46,7 @@ const items = ref([])
 const company = ref(null)
 const existingPath = ref('')
 const existingId = ref(route.params.id || '')
+const pdfUrl = ref('')
 
 const form = reactive({
   bill_type: 'sale',
@@ -75,12 +76,12 @@ const filteredParties = computed(() =>
   ),
 )
 
-const whatsappHref = computed(() =>
-  buildWhatsAppLink(
+const whatsappHref = computed(() => {
+  return buildWhatsAppLink(
     form.party_phone,
-    `Hello ${form.party_name}, please find Ideal Energy invoice ${form.invoice_no}.`,
-  ),
-)
+    `Hello ${form.party_name}, please find attached Ideal Energy invoice ${form.invoice_no}.`,
+  )
+})
 
 onMounted(async () => {
   const userId = session.value?.user?.id
@@ -138,6 +139,7 @@ onMounted(async () => {
     }
     existingId.value = bill.id
     existingPath.value = bill.pdf_path || ''
+    pdfUrl.value = bill.pdf_url || ''
     Object.assign(form, {
       bill_type: bill.bill_type,
       invoice_no: bill.invoice_no,
@@ -362,6 +364,7 @@ async function onSave(generatePdf) {
         .update({ pdf_url: uploaded.pdf_url, pdf_path: uploaded.pdf_path })
         .eq('id', billId)
       if (pdfErr) throw pdfErr
+      pdfUrl.value = uploaded.pdf_url
       window.open(uploaded.pdf_url, '_blank', 'noopener,noreferrer')
     }
 
@@ -370,6 +373,56 @@ async function onSave(generatePdf) {
     error.value = err.message || 'Could not save bill'
   } finally {
     saving.value = false
+  }
+}
+
+const sharing = ref(false)
+
+async function sharePdfToWhatsApp() {
+  if (!pdfUrl.value) {
+    window.open(whatsappHref.value, '_blank', 'noopener,noreferrer')
+    return
+  }
+  
+  sharing.value = true
+  try {
+    if (!navigator.canShare || !navigator.share) {
+      throw new Error('Web Share API not supported on this browser')
+    }
+
+    const response = await fetch(pdfUrl.value)
+    if (!response.ok) throw new Error('Could not fetch PDF (CORS or network error)')
+    
+    const blob = await response.blob()
+    const file = new File([blob], `Ideal_Energy_Invoice_${form.invoice_no}.pdf`, { type: 'application/pdf' })
+
+    const shareData = {
+      title: `Invoice ${form.invoice_no}`,
+      text: `Hello ${form.party_name}, please find attached Ideal Energy invoice ${form.invoice_no}.`,
+      files: [file]
+    }
+
+    if (navigator.canShare(shareData)) {
+      await navigator.share(shareData)
+    } else {
+      throw new Error('Device does not support sharing files natively')
+    }
+  } catch (err) {
+    console.error('Error sharing PDF:', err)
+    
+    // Fallback: Download the file automatically so it's ready to attach
+    const link = document.createElement('a')
+    link.href = pdfUrl.value
+    link.target = '_blank'
+    link.download = `Invoice_${form.invoice_no}.pdf`
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+
+    alert(`Cannot auto-attach PDF: ${err.message}. \n\nThe PDF is downloading now. The WhatsApp chat will open — please drag and drop the downloaded file manually.`)
+    window.open(whatsappHref.value, '_blank', 'noopener,noreferrer')
+  } finally {
+    sharing.value = false
   }
 }
 </script>
@@ -616,15 +669,15 @@ async function onSave(generatePdf) {
         >
           {{ saving ? 'Working…' : 'Generate PDF & save' }}
         </button>
-        <a
+        <button
           v-if="form.party_phone"
-          :href="whatsappHref"
-          target="_blank"
-          rel="noreferrer"
-          class="rounded-full bg-[#25d366] px-5 py-3 text-sm font-bold text-white"
+          type="button"
+          class="inline-flex items-center gap-2 rounded-full bg-[#25d366] px-5 py-3 text-sm font-bold text-white transition hover:bg-[#1ebe57] disabled:opacity-60"
+          :disabled="sharing"
+          @click="sharePdfToWhatsApp"
         >
-          WhatsApp party
-        </a>
+          {{ sharing ? 'Preparing...' : 'WhatsApp party' }}
+        </button>
       </div>
     </template>
   </div>
