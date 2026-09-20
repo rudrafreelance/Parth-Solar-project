@@ -6,19 +6,19 @@ const testimonials = [
     quote: 'The whole process felt effortless. Every question was answered clearly, the crew was meticulous, and our first power bill dropped by more than half.',
     name: 'Jignes Panchal.',
     role: 'Ahmedabad · Nikol',
-    initials: 'MR',
+    initials: 'JP',
   },
   {
     quote: 'Ideal Energy gave us a realistic business case and then delivered exactly what they promised. The system is already outperforming the original projection.',
     name: 'Hardik Patel',
     role: 'Kadi · Gujarat',
-    initials: 'MC',
+    initials: 'HP',
   },
   {
     quote: 'From design through activation, we always knew what was happening next. It is rare to find this level of craftsmanship and communication together.',
     name: 'Rudra Purohit',
     role: 'Property Owner · Ahmedabad, Sindhu bhavan',
-    initials: 'EF',
+    initials: 'RP',
   },
 ]
 </script>
