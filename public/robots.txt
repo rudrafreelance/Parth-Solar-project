@@ -5,4 +5,4 @@ Disallow: /admin/
 Disallow: /billing
 Disallow: /billing/
 
-Sitemap: https://ideal-energy.in/sitemap.xml
+Sitemap: https://www.ideal-energy.in/sitemap.xml
