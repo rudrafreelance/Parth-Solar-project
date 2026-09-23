@@ -37,7 +37,7 @@ useHead({
   title: 'Solar Panels Gujarat – Ideal Energy | Premium Solar Solutions',
   meta: [
     { name: 'description', content: 'Looking for solar panels in Gujarat? Ideal Energy provides premium residential and commercial solar installations across Gujarat with government subsidies and expert support.' },
-    { name: 'keywords', content: 'solar panels Gujarat, rooftop solar Gujarat, solar installation Gujarat, solar subsidy Gujarat' },
+    { name: 'keywords', content: 'Solar Panel, Solar Rooftop, Solar Panel Price, Solar System for Home, Rooftop Solar, Solar Panel Installation, Solar EPC Company, Solar Subsidy, 3 kW Solar System, Solar Panel Price in Ahmedabad, Solar Company in Ahmedabad, Rooftop Solar Ahmedabad, Solar Panel Price Ahmedabad, Solar EPC Ahmedabad, Residential Solar Ahmedabad, solar panels Gujarat' },
     { name: 'canonical', content: 'https://www.ideal-energy.in/solar-panels-gujarat' }
   ]
 })
