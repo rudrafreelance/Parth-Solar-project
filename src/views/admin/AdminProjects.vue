@@ -91,6 +91,10 @@ async function uploadProject() {
 
 async function deleteProject(project) {
   if (!supabase) return
+  if (String(project.id).startsWith('fallback-')) {
+    setMessage('Cannot delete placeholder fallback projects.', 'error')
+    return
+  }
   if (!window.confirm(`Delete “${project.title}”?`)) return
 
   try {

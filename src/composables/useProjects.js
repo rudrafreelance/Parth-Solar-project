@@ -38,12 +38,12 @@ export function useProjects() {
 
       if (queryError) throw queryError
 
-      projects.value = data?.length ? sortProjects(data) : sortProjects(fallbackProjects)
+      projects.value = sortProjects(data || [])
       loadedOnce = true
       return projects.value
     } catch (err) {
       error.value = err.message || 'Failed to load projects'
-      projects.value = sortProjects(fallbackProjects)
+      projects.value = []
       loadedOnce = true
       return projects.value
     } finally {
