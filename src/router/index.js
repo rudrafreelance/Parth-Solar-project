@@ -365,6 +365,18 @@ const router = createRouter({
         },
       ],
     },
+{
+  path: '/solar-panels-gujarat',
+  name: 'solar-panels-gujarat',
+  component: () => import('@/views/SolarPanelsGujarat.vue'),
+  meta: {
+    seo: {
+      title: 'Solar Panels Gujarat – Ideal Energy | Premium Solar Solutions',
+      description: 'Ideal Energy provides high‑quality solar panel installations across Gujarat. Get a free quote now.',
+      path: '/solar-panels-gujarat',
+    },
+  },
+},
   ],
 })
 
