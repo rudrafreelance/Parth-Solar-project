@@ -11,6 +11,7 @@ export async function submitLead({
   email = '',
   address = '',
   message = '',
+  interest = '',
   sourceFallback = 'website_contact',
 }) {
   if (!isSupabaseConfigured || !supabase) {
@@ -26,7 +27,9 @@ export async function submitLead({
     phone: phone.trim(),
     email: email.trim(),
     address: address.trim(),
-    message: message.trim(),
+    message: [interest.trim() ? `Interest: ${interest.trim()}` : '', message.trim()]
+      .filter(Boolean)
+      .join('\n'),
     status: 'new',
     source,
     ...attribution,
@@ -37,7 +40,9 @@ export async function submitLead({
   const { error } = await supabase.from('leads').insert(row)
   if (error) throw error
 
-  await notifyAdminLead(row).catch(() => {})
+  await notifyAdminLead(row).catch((err) => {
+    console.error('Lead saved, but admin email was not sent:', err?.message || err)
+  })
 
   return { source }
 }

@@ -102,8 +102,21 @@ function localBusinessNode() {
     '@id': `${siteUrl()}/#business`,
     name: SITE_NAME,
     url: siteUrl(),
-    image: absoluteUrl(DEFAULT_IMAGE),
-    logo: absoluteUrl('/favicon.svg'),
+    image: absoluteUrl('/logo-cropped.png'),
+    logo: absoluteUrl('/favicon.png'),
+    priceRange: '₹₹',
+    openingHoursSpecification: [
+      {
+        '@type': 'OpeningHoursSpecification',
+        dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+        opens: '09:00',
+        closes: '19:00',
+      },
+    ],
+    sameAs: [
+      'https://www.instagram.com/idealeneergy',
+      'https://www.facebook.com/profile.php?id=61592209329460',
+    ],
     description: DEFAULT_DESCRIPTION,
     email: ADMIN_EMAIL,
     telephone: '+91-63558-59771',
@@ -206,4 +219,8 @@ export function serviceJsonLd(service) {
 
 export function pageJsonLd(crumbs) {
   return graph(localBusinessNode(), breadcrumbNode(crumbs))
+}
+
+export function faqPageJsonLd(faqs, crumbs) {
+  return graph(localBusinessNode(), faqNode(faqs), breadcrumbNode(crumbs))
 }

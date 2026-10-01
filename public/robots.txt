@@ -7,4 +7,4 @@ Disallow: /billing/
 Disallow: /thank-you
 Disallow: /go/
 
-Sitemap: https://idealenergy.in/sitemap.xml
+Sitemap: https://www.ideal-energy.in/sitemap.xml

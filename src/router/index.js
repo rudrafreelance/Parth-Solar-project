@@ -1,8 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
 import { useAdminAuth } from '@/composables/useAdminAuth'
-import { applySeo, homeJsonLd, pageJsonLd, serviceJsonLd } from '@/composables/useSeo'
-import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, getServiceSeo } from '@/data/localSeo'
+import { applySeo, faqPageJsonLd, homeJsonLd, pageJsonLd, serviceJsonLd } from '@/composables/useSeo'
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, getServiceSeo, priceFaqs } from '@/data/localSeo'
 import { getServiceById } from '@/components/services/servicesData'
 import { captureLeadAttribution } from '@/composables/useLeadAttribution'
 
@@ -366,18 +366,32 @@ const router = createRouter({
         },
       ],
     },
-{
-  path: '/solar-panels-gujarat',
-  name: 'solar-panels-gujarat',
-  component: () => import('@/views/SolarPanelsGujarat.vue'),
-  meta: {
-    seo: {
-      title: 'Solar Panels Gujarat – Ideal Energy | Premium Solar Solutions',
-      description: 'Ideal Energy provides high‑quality solar panel installations across Gujarat. Get a free quote now.',
-      path: '/solar-panels-gujarat',
+    {
+      path: '/solar-panel-price-ahmedabad',
+      name: 'solar-price',
+      component: () => import('@/views/SolarPriceAhmedabad.vue'),
+      meta: {
+        seo: {
+          title: 'Solar Panel Price in Ahmedabad | Ideal Energy',
+          description:
+            'Solar panel price in Ahmedabad depends on your bill, roof, and subsidy. Ideal Energy gives a free site survey and a clear quote for home and commercial rooftop solar.',
+          path: '/solar-panel-price-ahmedabad',
+        },
+      },
     },
-  },
-},
+    {
+      path: '/solar-panels-gujarat',
+      name: 'solar-panels-gujarat',
+      component: () => import('@/views/SolarPanelsGujarat.vue'),
+      meta: {
+        seo: {
+          title: 'Solar Installation in Gujarat | Ideal Energy',
+          description:
+            'Solar installation in Gujarat for homes and businesses, including Ahmedabad. Ideal Energy surveys the site, installs the rooftop system, and helps with subsidy paperwork.',
+          path: '/solar-panels-gujarat',
+        },
+      },
+    },
   ],
 })
 
@@ -444,11 +458,28 @@ router.afterEach((to) => {
       { name: 'Home', path: '/' },
       { name: 'Solar calculator', path: '/calculator' },
     ],
+    'solar-price': [
+      { name: 'Home', path: '/' },
+      { name: 'Solar panel price', path: '/solar-panel-price-ahmedabad' },
+    ],
+    'solar-panels-gujarat': [
+      { name: 'Home', path: '/' },
+      { name: 'Solar panels Gujarat', path: '/solar-panels-gujarat' },
+    ],
   }
+
+  const jsonLd =
+    to.name === 'home'
+      ? homeJsonLd()
+      : to.name === 'solar-price'
+        ? faqPageJsonLd(priceFaqs, crumbs['solar-price'])
+        : crumbs[to.name]
+          ? pageJsonLd(crumbs[to.name])
+          : null
 
   applySeo({
     ...seo,
-    jsonLd: to.name === 'home' ? homeJsonLd() : crumbs[to.name] ? pageJsonLd(crumbs[to.name]) : null,
+    jsonLd,
   })
 })
 

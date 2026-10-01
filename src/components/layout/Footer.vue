@@ -35,6 +35,8 @@ defineProps({
       { label: 'Services', to: '/services' },
       { label: 'Projects', to: '/projects' },
       { label: 'Calculator', to: '/calculator' },
+      { label: 'Solar panel price', to: '/solar-panel-price-ahmedabad' },
+      { label: 'Solar installation Gujarat', to: '/solar-panels-gujarat' },
       { label: 'Our Process', to: '/#process' },
       { label: 'Contact', to: '/#contact' },
     ],

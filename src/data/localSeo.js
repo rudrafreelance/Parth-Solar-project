@@ -1,11 +1,11 @@
 export const SITE_NAME = 'Ideal Energy'
-export const SITE_URL_FALLBACK = 'https://idealenergy.in'
+export const SITE_URL_FALLBACK = 'https://www.ideal-energy.in'
 export const CITY = 'Ahmedabad'
 export const REGION = 'Gujarat'
 
-export const DEFAULT_TITLE = 'Solar Panel Installation in Ahmedabad | Ideal Energy'
+export const DEFAULT_TITLE = 'Solar Installation in Ahmedabad & Gujarat | Ideal Energy'
 export const DEFAULT_DESCRIPTION =
-  'Ideal Energy installs rooftop solar in Ahmedabad and Gujarat for homes, shops, and factories. Free site survey, clear pricing, and PM Surya Ghar subsidy help.'
+  'Solar installation in Ahmedabad and across Gujarat for homes, shops, and factories. Ideal Energy surveys the roof, installs the system, and helps with the PM Surya Ghar subsidy.'
 
 export const homeFaqs = [
   {
@@ -115,6 +115,115 @@ const serviceSeoById = {
   },
 }
 
+export const priceFaqs = [
+  {
+    question: 'What is the solar panel price in Ahmedabad?',
+    answer:
+      'There is no single price. Ideal Energy quotes after a free site survey because the cost follows your monthly bill, usable roof, net metering, and whether you add a battery. Eligible Gujarat homes can also reduce the cost through PM Surya Ghar.',
+  },
+  {
+    question: 'How do I get a 3 kW or 5 kW solar quote in Ahmedabad?',
+    answer:
+      'Share your electricity bill and location on WhatsApp or the quote form. We size a 3 kW, 5 kW, or larger system to your units, then send the system size, expected savings, and payback before you commit.',
+  },
+  {
+    question: 'Does the PM Surya Ghar subsidy apply in Ahmedabad?',
+    answer:
+      'Eligible homes in Gujarat, including Ahmedabad, can apply under PM Surya Ghar. Ideal Energy checks eligibility, prepares the document checklist, and helps with the DISCOM and net-metering process.',
+  },
+  {
+    question: 'Which Ahmedabad areas do you survey?',
+    answer:
+      'We survey homes and businesses across Ahmedabad and nearby Gujarat, including Gandhinagar, Sanand, Naroda, Nikol, Bopal, Gota, and surrounding towns.',
+  },
+]
+
 export function getServiceSeo(id) {
   return serviceSeoById[id] || null
+}
+
+export function getIndexablePages() {
+  const pages = [
+    {
+      path: '/',
+      title: DEFAULT_TITLE,
+      description: DEFAULT_DESCRIPTION,
+      changefreq: 'weekly',
+      priority: '1.0',
+    },
+    {
+      path: '/solar-panel-price-ahmedabad',
+      title: 'Solar Panel Price in Ahmedabad | Ideal Energy',
+      description:
+        'Solar panel price in Ahmedabad depends on your bill, roof, and subsidy. Ideal Energy gives a free site survey and a clear quote for home and commercial rooftop solar.',
+      changefreq: 'weekly',
+      priority: '0.9',
+    },
+    {
+      path: '/services',
+      title: 'Solar Services in Ahmedabad | Rooftop, Commercial & Subsidy',
+      description:
+        'Residential, commercial, and industrial solar in Ahmedabad, plus batteries, maintenance, AMC, and PM Surya Ghar subsidy support from Ideal Energy.',
+      changefreq: 'weekly',
+      priority: '0.9',
+    },
+    {
+      path: '/calculator',
+      title: 'Solar Savings Calculator for Ahmedabad | Ideal Energy',
+      description:
+        'Estimate rooftop solar size, monthly savings, and payback from your Ahmedabad or Gujarat electricity bill. Free Ideal Energy calculator.',
+      changefreq: 'monthly',
+      priority: '0.9',
+    },
+    {
+      path: '/projects',
+      title: 'Solar Projects in Ahmedabad | Ideal Energy Installations',
+      description:
+        'See Ideal Energy rooftop and commercial solar projects in Ahmedabad and Gujarat, with real installation photos.',
+      changefreq: 'weekly',
+      priority: '0.8',
+    },
+    {
+      path: '/about',
+      title: 'About Ideal Energy | Solar Company in Ahmedabad',
+      description:
+        'Ideal Energy is an Ahmedabad solar company installing rooftop systems for homes and businesses across Gujarat, with subsidy help and after-sales support.',
+      changefreq: 'monthly',
+      priority: '0.7',
+    },
+    {
+      path: '/solar-panels-gujarat',
+      title: 'Solar Installation in Gujarat | Ideal Energy',
+      description:
+        'Solar installation in Gujarat for homes and businesses, including Ahmedabad. Ideal Energy surveys the site, installs the rooftop system, and helps with subsidy paperwork.',
+      changefreq: 'monthly',
+      priority: '0.8',
+    },
+    {
+      path: '/privacy',
+      title: 'Privacy Policy | Ideal Energy',
+      description: 'How Ideal Energy collects and uses contact and lead information.',
+      changefreq: 'yearly',
+      priority: '0.2',
+    },
+    {
+      path: '/terms',
+      title: 'Terms & Conditions | Ideal Energy',
+      description: 'Terms for using the Ideal Energy website and solar services.',
+      changefreq: 'yearly',
+      priority: '0.2',
+    },
+  ]
+
+  for (const [id, seo] of Object.entries(serviceSeoById)) {
+    pages.push({
+      path: `/services/${id}`,
+      title: seo.title,
+      description: seo.description,
+      changefreq: 'monthly',
+      priority: '0.8',
+    })
+  }
+
+  return pages
 }

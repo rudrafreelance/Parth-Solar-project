@@ -38,7 +38,7 @@ const benefits = [
           Rooftop solar in Ahmedabad, planned around your bill.
         </h2>
         <p data-aos="fade-up" data-aos-delay="160" class="mt-6 text-lg leading-8 text-slate-600">
-          Ideal Energy surveys homes and businesses across Ahmedabad, Gandhinagar, and nearby Gujarat. You get a system sized to your roof and electricity bill, help with net metering and the PM Surya Ghar subsidy, and a team that stays for maintenance.
+          Ideal Energy handles solar installation in Ahmedabad, Gandhinagar, and the rest of Gujarat. You get a system sized to your roof and electricity bill, help with net metering and the PM Surya Ghar subsidy, and a team that stays for maintenance.
         </p>
 
         <ul data-aos="fade-up" data-aos-delay="240" class="mt-8 space-y-4">
