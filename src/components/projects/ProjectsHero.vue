@@ -26,7 +26,7 @@ import { ChevronRight, Home } from '@lucide/vue'
         </ol>
       </nav>
       <h1 data-aos="fade-up" data-aos-delay="80" class="mt-7 max-w-4xl text-5xl font-bold leading-[1.05] tracking-[-0.04em] sm:text-6xl">
-        Real projects. Lasting impact.
+        Solar projects across Ahmedabad and Gujarat.
       </h1>
       <p data-aos="fade-up" data-aos-delay="160" class="mt-6 max-w-2xl text-lg leading-8 text-emerald-50/70">
         Explore Ideal Energy installations across homes, businesses, and industrial sites—documented with real project photography.

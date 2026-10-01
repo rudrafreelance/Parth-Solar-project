@@ -1,7 +1,9 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
 import { useAdminAuth } from '@/composables/useAdminAuth'
-import { applySeo, organizationJsonLd, faqJsonLd, serviceJsonLd } from '@/composables/useSeo'
+import { applySeo, homeJsonLd, pageJsonLd, serviceJsonLd } from '@/composables/useSeo'
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, getServiceSeo } from '@/data/localSeo'
+import { getServiceById } from '@/components/services/servicesData'
 import { captureLeadAttribution } from '@/composables/useLeadAttribution'
 
 const router = createRouter({
@@ -18,9 +20,8 @@ const router = createRouter({
       component: Home,
       meta: {
         seo: {
-          title: 'Ideal Energy | Solar Panels in Gujarat | Rooftop Solar Ahmedabad',
-          description:
-            'Ideal Energy installs rooftop solar panels for homes and businesses across Gujarat. Save up to 90% on electricity bills. PM Surya Ghar Yojana subsidy support. Free site assessment — call 63558 59771.',
+          title: DEFAULT_TITLE,
+          description: DEFAULT_DESCRIPTION,
           path: '/',
         },
       },
@@ -31,9 +32,9 @@ const router = createRouter({
       component: () => import('@/views/About.vue'),
       meta: {
         seo: {
-          title: 'About Ideal Energy | Ahmedabad Solar Company | Our Story',
+          title: 'About Ideal Energy | Solar Company in Ahmedabad',
           description:
-            'Ideal Energy is a trusted solar energy company in Ahmedabad, Gujarat with 8+ years of experience installing residential, commercial, and industrial solar systems. Meet our certified team.',
+            'Ideal Energy is an Ahmedabad solar company installing rooftop systems for homes and businesses across Gujarat, with subsidy help and after-sales support.',
           path: '/about',
         },
       },
@@ -44,9 +45,9 @@ const router = createRouter({
       component: () => import('@/views/Services.vue'),
       meta: {
         seo: {
-          title: 'Solar Services Gujarat | Residential, Commercial & Industrial Solar | Ideal Energy',
+          title: 'Solar Services in Ahmedabad | Rooftop, Commercial & Subsidy',
           description:
-            'Ideal Energy offers complete solar solutions in Gujarat — residential rooftop solar with PM Surya Ghar Yojana subsidy, commercial & industrial solar, battery storage, solar pumps, and AMC maintenance.',
+            'Residential, commercial, and industrial solar in Ahmedabad, plus batteries, maintenance, AMC, and PM Surya Ghar subsidy support from Ideal Energy.',
           path: '/services',
         },
       },
@@ -69,9 +70,9 @@ const router = createRouter({
       component: () => import('@/views/Projects.vue'),
       meta: {
         seo: {
-          title: 'Solar Projects in Gujarat | Ideal Energy Installation Gallery',
+          title: 'Solar Projects in Ahmedabad | Ideal Energy Installations',
           description:
-            'View completed solar installations by Ideal Energy across Gujarat — residential homes in Ahmedabad, commercial factories, and industrial sites with real photos and system details.',
+            'See Ideal Energy rooftop and commercial solar projects in Ahmedabad and Gujarat, with real installation photos.',
           path: '/projects',
         },
       },
@@ -82,9 +83,9 @@ const router = createRouter({
       component: () => import('@/views/Calculator.vue'),
       meta: {
         seo: {
-          title: 'Solar Savings Calculator Gujarat | How Much Can You Save? | Ideal Energy',
+          title: 'Solar Savings Calculator for Ahmedabad | Ideal Energy',
           description:
-            'Estimate your rooftop solar system size, monthly savings, and payback with Ideal Energy’s free solar calculator.',
+            'Estimate rooftop solar size, monthly savings, and payback from your Ahmedabad or Gujarat electricity bill. Free Ideal Energy calculator.',
           path: '/calculator',
         },
       },
@@ -409,14 +410,45 @@ router.afterEach((to) => {
   const queryString = to.fullPath.includes('?') ? `?${to.fullPath.split('?')[1]}` : ''
   captureLeadAttribution(queryString)
 
+  if (to.name === 'service-detail') {
+    const service = getServiceById(String(to.params.slug || ''))
+    const serviceSeo = service ? getServiceSeo(service.id) : null
+    if (service && serviceSeo) {
+      applySeo({
+        title: serviceSeo.title,
+        description: serviceSeo.description,
+        path: `/services/${service.id}`,
+        jsonLd: serviceJsonLd(service),
+      })
+      return
+    }
+  }
+
   const seo = [...to.matched].reverse().find((record) => record.meta?.seo)?.meta?.seo
   if (!seo) return
 
+  const crumbs = {
+    about: [
+      { name: 'Home', path: '/' },
+      { name: 'About', path: '/about' },
+    ],
+    services: [
+      { name: 'Home', path: '/' },
+      { name: 'Solar services', path: '/services' },
+    ],
+    projects: [
+      { name: 'Home', path: '/' },
+      { name: 'Projects', path: '/projects' },
+    ],
+    calculator: [
+      { name: 'Home', path: '/' },
+      { name: 'Solar calculator', path: '/calculator' },
+    ],
+  }
+
   applySeo({
     ...seo,
-    // Home page: LocalBusiness schema + FAQ schema (two rich result opportunities)
-    jsonLd: to.name === 'home' ? organizationJsonLd() : null,
-    jsonLd2: to.name === 'home' ? faqJsonLd() : to.name === 'services' ? serviceJsonLd() : null,
+    jsonLd: to.name === 'home' ? homeJsonLd() : crumbs[to.name] ? pageJsonLd(crumbs[to.name]) : null,
   })
 })
 

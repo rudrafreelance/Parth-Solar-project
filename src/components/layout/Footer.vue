@@ -57,7 +57,7 @@ defineProps({
       phoneHref: ADMIN_TEL_HREF,
       email: ADMIN_EMAIL,
       emailHref: ADMIN_EMAIL_HREF,
-      address: 'Ahmedabad, Gujarat, India',
+      address: 'Ahmedabad, Gandhinagar & Gujarat',
       mapHref: 'https://maps.google.com/?q=Ahmedabad+Gujarat+India',
       whatsappHref: ADMIN_WHATSAPP_HREF,
     }),

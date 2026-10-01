@@ -175,7 +175,7 @@ async function requestFullPlan() {
         Solar savings calculator
       </p>
       <h1 class="mt-4 text-4xl font-bold tracking-[-0.04em] text-emerald-950 sm:text-5xl">
-        See what sunlight could save you each month.
+        Estimate rooftop solar savings in Ahmedabad.
       </h1>
       <p class="mt-5 max-w-xl text-lg leading-8 text-slate-600">
         Enter the amount on your electricity bill — monthly or 2-month (common in Gujarat) — for a quick Ideal Energy estimate.

@@ -35,10 +35,10 @@ const benefits = [
       <div class="text-left">
         <p data-aos="fade-up" class="text-sm font-bold uppercase tracking-[0.2em] text-emerald-700">About Ideal Energy</p>
         <h2 data-aos="fade-up" data-aos-delay="80" class="mt-4 text-4xl font-bold leading-tight tracking-[-0.035em] text-emerald-950 sm:text-5xl">
-          Energy independence starts with a better plan.
+          Rooftop solar in Ahmedabad, planned around your bill.
         </h2>
         <p data-aos="fade-up" data-aos-delay="160" class="mt-6 text-lg leading-8 text-slate-600">
-          We pair thoughtful engineering with honest guidance to create solar systems that perform beautifully for decades—not just on installation day.
+          Ideal Energy surveys homes and businesses across Ahmedabad, Gandhinagar, and nearby Gujarat. You get a system sized to your roof and electricity bill, help with net metering and the PM Surya Ghar subsidy, and a team that stays for maintenance.
         </p>
 
         <ul data-aos="fade-up" data-aos-delay="240" class="mt-8 space-y-4">

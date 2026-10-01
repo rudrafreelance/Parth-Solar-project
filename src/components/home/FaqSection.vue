@@ -2,28 +2,7 @@
 import { ref } from 'vue'
 import { Minus, Plus } from '@lucide/vue'
 
-const faqs = [
-  {
-    question: 'How much can I save by going solar?',
-    answer: 'Savings depend on your energy use, roof, utility rates, and local incentives. After a site review, we provide a transparent production and savings forecast based on your actual property.',
-  },
-  {
-    question: 'What happens when the sun is not shining?',
-    answer: 'Your home remains connected to the grid, so power continues normally. A battery can store excess daytime production for evenings, outages, or periods of lower sunlight.',
-  },
-  {
-    question: 'How long does installation take?',
-    answer: 'Most residential installations are completed in one to three days. Permitting and utility approval happen beforehand, and your project manager keeps you updated throughout.',
-  },
-  {
-    question: 'Will solar panels damage my roof?',
-    answer: 'No. Our certified team inspects your roof first and uses engineered mounting and weatherproofing methods. Properly installed panels can also shield roofing from sun and weather.',
-  },
-  {
-    question: 'What maintenance do solar panels need?',
-    answer: 'Solar panels have no moving parts and generally require very little maintenance. We monitor system health and will let you know if cleaning or service is ever recommended.',
-  },
-]
+import { homeFaqs as faqs } from '@/data/localSeo'
 
 const openItem = ref(0)
 
@@ -38,7 +17,7 @@ function toggleItem(index) {
       <div class="text-left">
         <p data-aos="fade-up" class="text-sm font-bold uppercase tracking-[0.2em] text-emerald-700">Questions, answered</p>
         <h2 data-aos="fade-up" data-aos-delay="80" class="mt-4 text-4xl font-bold leading-tight tracking-[-0.035em] text-emerald-950 sm:text-5xl">
-          Everything you need to know before going solar.
+          Solar questions Ahmedabad homeowners ask first.
         </h2>
         <p data-aos="fade-up" data-aos-delay="160" class="mt-6 text-lg leading-8 text-slate-600">
           Still curious? Our energy advisors are happy to give you a straightforward answer.

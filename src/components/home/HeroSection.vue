@@ -29,7 +29,7 @@ const productionBars = ['h-[35%]', 'h-[48%]', 'h-[42%]', 'h-[68%]', 'h-[82%]', '
           class="mb-7 inline-flex items-center gap-2 rounded-full border border-lime-300/25 bg-lime-300/10 px-4 py-2 text-sm font-semibold text-lime-200 backdrop-blur"
         >
           <Sun class="h-4 w-4" aria-hidden="true" />
-          Clean energy, built around your life
+          Ahmedabad solar company
         </div>
 
         <h1
@@ -37,15 +37,15 @@ const productionBars = ['h-[35%]', 'h-[48%]', 'h-[42%]', 'h-[68%]', 'h-[82%]', '
           data-aos-delay="100"
           class="max-w-3xl text-5xl font-bold leading-[1.05] tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl"
         >
-          Power your future with
-          <span class="text-lime-300">smarter solar.</span>
+          Solar panel installation
+          <span class="text-lime-300">in Ahmedabad.</span>
         </h1>
         <p
           data-aos="fade-up"
           data-aos-delay="200"
           class="mt-7 max-w-2xl text-lg leading-8 text-emerald-50/75 sm:text-xl"
         >
-          From design to installation, we make switching to reliable, affordable solar energy refreshingly simple.
+          Rooftop solar for homes, shops, and factories across Ahmedabad and Gujarat. Free site survey, clear pricing, and PM Surya Ghar subsidy help.
         </p>
 
         <div data-aos="fade-up" data-aos-delay="300" class="mt-10 flex flex-col gap-4 sm:flex-row">

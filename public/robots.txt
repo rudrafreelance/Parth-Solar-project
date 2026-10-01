@@ -4,5 +4,7 @@ Disallow: /admin
 Disallow: /admin/
 Disallow: /billing
 Disallow: /billing/
+Disallow: /thank-you
+Disallow: /go/
 
-Sitemap: https://www.ideal-energy.in/sitemap.xml
+Sitemap: https://idealenergy.in/sitemap.xml

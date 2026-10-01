@@ -4,13 +4,14 @@ import { useRoute, useRouter } from 'vue-router'
 import { ArrowLeft, ArrowRight, CheckCircle2 } from '@lucide/vue'
 import ServicesCTA from '@/components/services/ServicesCTA.vue'
 import { getServiceById, services, servicePath } from '@/components/services/servicesData'
+import { getServiceSeo } from '@/data/localSeo'
 import { openWhatsApp } from '@/lib/contact'
-import { applySeo } from '@/composables/useSeo'
 
 const route = useRoute()
 const router = useRouter()
 
 const service = computed(() => getServiceById(String(route.params.slug || '')))
+const serviceSeo = computed(() => (service.value ? getServiceSeo(service.value.id) : null))
 
 const related = computed(() =>
   services.filter((item) => item.id !== service.value?.id).slice(0, 3),
@@ -19,15 +20,7 @@ const related = computed(() =>
 watch(
   service,
   (current) => {
-    if (!current) {
-      router.replace({ name: 'services' })
-      return
-    }
-    applySeo({
-      title: `${current.title} | Ideal Energy`,
-      description: current.description,
-      path: servicePath(current.id),
-    })
+    if (!current) router.replace({ name: 'services' })
   },
   { immediate: true },
 )
@@ -66,9 +59,12 @@ function discussService() {
             <component :is="service.icon" class="h-7 w-7" aria-hidden="true" />
           </span>
           <h1 class="text-4xl font-bold tracking-[-0.04em] sm:text-5xl lg:text-6xl">
-            {{ service.title }}
+            {{ serviceSeo?.heading || service.title }}
           </h1>
           <p class="text-lg leading-8 text-emerald-50/75">{{ service.overview }}</p>
+          <p v-if="serviceSeo?.localCopy" class="text-base leading-7 text-emerald-50/70">
+            {{ serviceSeo.localCopy }}
+          </p>
           <div class="flex flex-col gap-3 sm:flex-row">
             <button
               type="button"

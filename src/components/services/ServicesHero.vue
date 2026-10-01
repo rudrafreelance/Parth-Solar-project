@@ -21,10 +21,10 @@ import { ArrowRight, ChevronRight, Home } from '@lucide/vue'
         </ol>
       </nav>
       <h1 data-aos="fade-up" data-aos-delay="80" class="mt-7 max-w-4xl text-5xl font-bold leading-[1.05] tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl">
-        Complete solar solutions, engineered around you.
+        Solar services in Ahmedabad.
       </h1>
       <p data-aos="fade-up" data-aos-delay="160" class="mt-7 max-w-2xl text-lg leading-8 text-emerald-50/70 sm:text-xl">
-        From rooftop solar to intelligent storage and lifetime care, one expert team delivers energy systems built to perform.
+        Rooftop solar, commercial plants, batteries, maintenance, and PM Surya Ghar subsidy support for Ahmedabad and Gujarat.
       </p>
       <a data-aos="fade-up" data-aos-delay="240" href="#service-catalog" class="mt-9 inline-flex items-center gap-2 rounded-full bg-lime-300 px-7 py-4 font-bold text-emerald-950 transition hover:-translate-y-0.5 hover:bg-lime-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lime-300">
         Explore our services

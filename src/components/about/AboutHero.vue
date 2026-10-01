@@ -27,10 +27,10 @@ import { ChevronRight, Home } from '@lucide/vue'
         </ol>
       </nav>
       <h1 data-aos="fade-up" data-aos-delay="80" class="mt-7 max-w-4xl text-5xl font-bold leading-[1.05] tracking-[-0.04em] text-white sm:text-6xl lg:text-7xl">
-        Building a brighter future, one roof at a time.
+        An Ahmedabad solar company that stays after installation.
       </h1>
       <p data-aos="fade-up" data-aos-delay="160" class="mt-7 max-w-2xl text-lg leading-8 text-emerald-50/70 sm:text-xl">
-        We combine honest guidance, thoughtful engineering, and enduring craftsmanship to make clean energy work beautifully.
+        Ideal Energy designs and installs rooftop solar across Ahmedabad and Gujarat, then stays on for maintenance, monitoring, and subsidy follow-up.
       </p>
     </div>
   </section>
