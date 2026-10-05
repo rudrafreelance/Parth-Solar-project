@@ -132,6 +132,7 @@ function localBusinessNode() {
       { '@type': 'AdministrativeArea', name: 'Gujarat' },
     ],
     knowsAbout: [
+      'Solar installation in Ahmedabad',
       'Rooftop solar installation',
       'PM Surya Ghar subsidy',
       'Commercial solar',

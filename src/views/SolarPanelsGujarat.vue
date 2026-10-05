@@ -15,7 +15,7 @@
     <p class="mb-4">We offer residential rooftop solar, commercial solar, industrial solar, battery storage, solar pumps, and full‑service maintenance contracts.</p>
     <h2 class="text-2xl font-semibold mb-2">Get a Free Quote</h2>
     <p class="mb-4">
-      Fill out the form below, see <RouterLink to="/solar-panel-price-ahmedabad" class="font-semibold underline">solar panel prices in Ahmedabad</RouterLink>, or call <strong>63558 59771</strong> for a free site assessment.
+      Fill out the form below, see <RouterLink to="/solar-installation-ahmedabad" class="font-semibold underline">solar installation in Ahmedabad</RouterLink>, <RouterLink to="/solar-panel-price-ahmedabad" class="font-semibold underline">solar panel prices in Ahmedabad</RouterLink>, or call <strong>63558 59771</strong> for a free site assessment.
     </p>
     <!-- Simple contact form placeholder -->
     <form class="grid gap-4" @submit.prevent="submitForm">

@@ -39,6 +39,9 @@ const benefits = [
         </h2>
         <p data-aos="fade-up" data-aos-delay="160" class="mt-6 text-lg leading-8 text-slate-600">
           Ideal Energy handles solar installation in Ahmedabad, Gandhinagar, and the rest of Gujarat. You get a system sized to your roof and electricity bill, help with net metering and the PM Surya Ghar subsidy, and a team that stays for maintenance.
+          <RouterLink to="/solar-installation-ahmedabad" class="mt-3 inline-block font-bold text-emerald-800 underline-offset-4 hover:underline">
+            How solar installation in Ahmedabad works
+          </RouterLink>
         </p>
 
         <ul data-aos="fade-up" data-aos-delay="240" class="mt-8 space-y-4">

@@ -115,6 +115,34 @@ const serviceSeoById = {
   },
 }
 
+export const installationFaqs = [
+  {
+    question: 'How long does solar installation take in Ahmedabad?',
+    answer:
+      'Most home rooftops in Ahmedabad are installed in one to three days after the site survey and material are ready. Net metering with the DISCOM and PM Surya Ghar paperwork continue in parallel, and your project contact keeps you updated.',
+  },
+  {
+    question: 'What is included in a solar installation?',
+    answer:
+      'Ideal Energy includes the roof survey, system design, mounting structure, panels, inverter, cabling, earthing, and commissioning. Eligible Gujarat homes also get help with the subsidy file and net-metering application.',
+  },
+  {
+    question: 'Do you install solar on homes, shops, and factories?',
+    answer:
+      'Yes. We install residential rooftop solar, commercial systems for shops and offices, and industrial plants around Ahmedabad. The survey decides the size from your electricity bill and usable roof.',
+  },
+  {
+    question: 'Which Ahmedabad areas do you cover for installation?',
+    answer:
+      'We install across Ahmedabad and nearby Gujarat, including Gandhinagar, Sanand, Naroda, Nikol, Bopal, Gota, and surrounding towns. Share your location on WhatsApp to book a survey.',
+  },
+  {
+    question: 'Will the installation include the PM Surya Ghar subsidy?',
+    answer:
+      'If your home in Gujarat is eligible, we check the subsidy, prepare the document checklist, and help with the DISCOM process alongside the installation. The subsidy is not automatic for every connection.',
+  },
+]
+
 export const priceFaqs = [
   {
     question: 'What is the solar panel price in Ahmedabad?',
@@ -150,6 +178,14 @@ export function getIndexablePages() {
       description: DEFAULT_DESCRIPTION,
       changefreq: 'weekly',
       priority: '1.0',
+    },
+    {
+      path: '/solar-installation-ahmedabad',
+      title: 'Solar Installation in Ahmedabad | Ideal Energy',
+      description:
+        'Solar installation in Ahmedabad for homes, shops, and factories. Ideal Energy surveys the roof, installs the rooftop system, and helps with net metering and the PM Surya Ghar subsidy.',
+      changefreq: 'weekly',
+      priority: '0.95',
     },
     {
       path: '/solar-panel-price-ahmedabad',

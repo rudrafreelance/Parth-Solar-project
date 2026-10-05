@@ -2,7 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router'
 import Home from '@/views/Home.vue'
 import { useAdminAuth } from '@/composables/useAdminAuth'
 import { applySeo, faqPageJsonLd, homeJsonLd, pageJsonLd, serviceJsonLd } from '@/composables/useSeo'
-import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, getServiceSeo, priceFaqs } from '@/data/localSeo'
+import { DEFAULT_DESCRIPTION, DEFAULT_TITLE, getServiceSeo, installationFaqs, priceFaqs } from '@/data/localSeo'
 import { getServiceById } from '@/components/services/servicesData'
 import { captureLeadAttribution } from '@/composables/useLeadAttribution'
 
@@ -367,6 +367,19 @@ const router = createRouter({
       ],
     },
     {
+      path: '/solar-installation-ahmedabad',
+      name: 'solar-installation',
+      component: () => import('@/views/SolarInstallationAhmedabad.vue'),
+      meta: {
+        seo: {
+          title: 'Solar Installation in Ahmedabad | Ideal Energy',
+          description:
+            'Solar installation in Ahmedabad for homes, shops, and factories. Ideal Energy surveys the roof, installs the rooftop system, and helps with net metering and the PM Surya Ghar subsidy.',
+          path: '/solar-installation-ahmedabad',
+        },
+      },
+    },
+    {
       path: '/solar-panel-price-ahmedabad',
       name: 'solar-price',
       component: () => import('@/views/SolarPriceAhmedabad.vue'),
@@ -458,6 +471,10 @@ router.afterEach((to) => {
       { name: 'Home', path: '/' },
       { name: 'Solar calculator', path: '/calculator' },
     ],
+    'solar-installation': [
+      { name: 'Home', path: '/' },
+      { name: 'Solar installation in Ahmedabad', path: '/solar-installation-ahmedabad' },
+    ],
     'solar-price': [
       { name: 'Home', path: '/' },
       { name: 'Solar panel price', path: '/solar-panel-price-ahmedabad' },
@@ -471,11 +488,13 @@ router.afterEach((to) => {
   const jsonLd =
     to.name === 'home'
       ? homeJsonLd()
-      : to.name === 'solar-price'
-        ? faqPageJsonLd(priceFaqs, crumbs['solar-price'])
-        : crumbs[to.name]
-          ? pageJsonLd(crumbs[to.name])
-          : null
+      : to.name === 'solar-installation'
+        ? faqPageJsonLd(installationFaqs, crumbs['solar-installation'])
+        : to.name === 'solar-price'
+          ? faqPageJsonLd(priceFaqs, crumbs['solar-price'])
+          : crumbs[to.name]
+            ? pageJsonLd(crumbs[to.name])
+            : null
 
   applySeo({
     ...seo,

@@ -48,6 +48,9 @@ const productionBars = ['h-[35%]', 'h-[48%]', 'h-[42%]', 'h-[68%]', 'h-[82%]', '
           Solar installation in Ahmedabad and across Gujarat for homes, shops, and factories. Free site survey, clear pricing, and PM Surya Ghar subsidy help.
         </p>
         <div class="mt-4 flex flex-col gap-2 text-sm font-semibold text-lime-200 sm:flex-row sm:gap-5">
+          <RouterLink to="/solar-installation-ahmedabad" class="underline-offset-4 hover:underline">
+            Solar installation in Ahmedabad
+          </RouterLink>
           <RouterLink to="/solar-panels-gujarat" class="underline-offset-4 hover:underline">
             Solar installation in Gujarat
           </RouterLink>

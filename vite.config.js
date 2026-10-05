@@ -18,7 +18,7 @@ function esc(value) {
 function pageHtml(shell, page, site) {
   const url = page.path === '/' ? `${site}/` : `${site}${page.path}`
   const heading = page.title.replace(/\s+\|\s+Ideal Energy$/, '')
-  const body = `<header><p><a href="/">Ideal Energy</a> — solar company in Ahmedabad. <a href="tel:+916355859771">Call 63558 59771</a></p><nav><a href="/solar-panel-price-ahmedabad">Solar panel price in Ahmedabad</a> <a href="/services">Solar services</a> <a href="/calculator">Solar calculator</a> <a href="/projects">Projects</a> <a href="/about">About</a></nav></header><main><h1>${esc(heading)}</h1><p>${esc(page.description)}</p></main>`
+  const body = `<header><p><a href="/">Ideal Energy</a> — solar company in Ahmedabad. <a href="tel:+916355859771">Call 63558 59771</a></p><nav><a href="/solar-installation-ahmedabad">Solar installation in Ahmedabad</a> <a href="/solar-panel-price-ahmedabad">Solar panel price in Ahmedabad</a> <a href="/services">Solar services</a> <a href="/calculator">Solar calculator</a> <a href="/projects">Projects</a> <a href="/about">About</a></nav></header><main><h1>${esc(heading)}</h1><p>${esc(page.description)}</p></main>`
   let html = shell
     .replace(/<title>[^<]*<\/title>/, `<title>${esc(page.title)}</title>`)
     .replace(/(<meta\s+name="description"\s+content=")[^"]*(")/, `$1${esc(page.description)}$2`)
